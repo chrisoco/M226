@@ -1,0 +1,3 @@
+1.)	CREATE USER 'JavaApp'@'localhost' IDENTIFIED WITH mysql_native_password BY 'javaapp';
+2.)	GRANT ALL PRIVILEGES ON m153.* TO 'JavaApp'@'localhost';
+3.)	FLUSH PRIVILEGES;
