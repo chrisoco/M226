@@ -64,8 +64,9 @@ public class DB {
 		
 		ArrayList<Person> searchResult = new ArrayList<Person>();
 		
-		String query = "SELECT * FROM m153.tbl_person " +
-					   "WHERE lastName LIKE '" + userSearch + "%';";
+		String query = "SELECT * FROM m153.tbl_person "
+					 + "WHERE lastName LIKE '" + userSearch + "%'"
+					 + "ORDER BY lastName, firstName;";
 		
 		int i = 0;
 		
