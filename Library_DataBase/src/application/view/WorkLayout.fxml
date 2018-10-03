@@ -10,7 +10,7 @@
          <tabs>
             <Tab closable="false" text="HOME">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <fx:include fx:id="HomeTab" source="./tab/home/HomeTab.fxml"/>
               </content>
             </Tab>
             <Tab text="Person">
@@ -20,7 +20,7 @@
             </Tab>
             <Tab text="Book">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <fx:include fx:id="BookTab" source="./tab/book/BookTab.fxml"/>
               </content>
             </Tab>
             <Tab text="RENT">
