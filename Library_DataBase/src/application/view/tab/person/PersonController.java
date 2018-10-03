@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -14,6 +16,8 @@ import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
 public class PersonController {
 	
@@ -42,6 +46,8 @@ public class PersonController {
 	@FXML
 	private JFXComboBox<String> store;
 	
+	@FXML 
+	private StackPane dialogPane;
 	
 	
 	private SQLPerson SQL = new SQLPerson();
@@ -211,6 +217,8 @@ public class PersonController {
 	
 	private void addNewPersonToDB() {
 		
+		boolean customer = false, staff = false;
+		
 		int addressID = getAddressID(country.getText(),    plz.getText(), 
 										 city.getText(), street.getText());
 		
@@ -221,29 +229,25 @@ public class PersonController {
 		
 		p.setID(SQL.insertBasicPerson(p));
 		
-		
-		System.out.println("Person Added to DB: " + (p.getID() > 0));
-		// TODO: USER POPUP ... :)
 
 		if (isCustomer.isSelected()) {
 
-			// Insert to DB
-			boolean completedCustomer = 
-					SQL.insertCustomer(p.getID(), formatDateOfCal(customerCal.getValue()));
-			
-			System.out.println("Customer Added to DB: " + completedCustomer);
+			customer = SQL.insertCustomer(p.getID(), formatDateOfCal(customerCal.getValue()));
 		}
 
 		if (isStaff.isSelected()) {
 			
 			// Insert to DB
-			boolean completedStaff = 
-					SQL.insertStaff(p.getID(), username.getText(), password.getText(), 
-											formatDateOfCal(staffCal.getValue()), 
-											store.getSelectionModel().getSelectedIndex() + 1);
+			staff = SQL.insertStaff(p.getID(), username.getText(), password.getText(), 
+							formatDateOfCal(staffCal.getValue()), 
+							store.getSelectionModel().getSelectedIndex() + 1);
 			
-			System.out.println("Staff Added to DB: " + completedStaff);
 		}
+		
+		loadDialog( "P: " + p.getFirstName() + " " + p.getLastName() , 
+					"Person ADDED : " + (p.getID() > 0) + "\n\n" +
+					"isCustomer   : " + customer + "\n\n" +
+					"isStaff      : " + staff);
 		
 	}
 	
@@ -252,16 +256,14 @@ public class PersonController {
 		Person p = update(personSearchList.get(
 							personListView.getSelectionModel().getSelectedIndex()));
 		
-		boolean basic = SQL.updateBasicPerson(p);
-		System.out.println("UPDATED BASIC INFO... : " + basic);
-		
-		/** CUSTOMER **/
+		boolean basic    = SQL.updateBasicPerson(p);
 		boolean customer = SQL.updateCustomer(p.getID(), p.getCustomerCal(), p.isCustomer());
-		System.out.println("UPDATED CUSTOMER... : " + customer);
+		boolean staff    = SQL.updateStaff(p);
 		
-		/** STAFF **/
-		boolean staff = SQL.updateStaff(p);
-		System.out.println("UPDATED STAFF... : " + staff);
+		loadDialog("P: " + p.getFirstName() + " " + p.getLastName() , 
+					"Person UPDATED : " + basic    + "\n\n" +
+					"Customer       : " + customer + "\n\n" +
+					"Staff          : " + staff);
 		
 		
 	}
@@ -313,6 +315,7 @@ public class PersonController {
 			street   .getText().isEmpty() || houseNumber.getText().isEmpty() ||
 			tel      .getText().isEmpty() || plz        .getText().isEmpty() || 
 			city     .getText().isEmpty() || country    .getText().isEmpty()) {
+			loadDialog("ER: EMPTY FIELD(s)", "ReCheck if all Basic Informations Have been Entered!..");
 			return false;
 		}
 		
@@ -324,30 +327,29 @@ public class PersonController {
 		if (basicInputCheck()) {
 			/** CUSTOMER CALENDER TEST **/
 			if (isCustomer.isSelected() && customerCal.getValue() == null) {
-				System.out.println("CUSTOMER CAL...");
+				loadDialog("ER: EMPTY FIELD", "No Value Entered in Customer Cal!..");
 				return false;
 			}
 			
 			/** STAFF INFO TEST **/
 			if (isStaff.isSelected()) {
 				if (staffCal.getValue() == null) {
-					System.out.println("STAFF CAL...");
+					loadDialog("ER: EMPTY FIELD", "No Value Entered in Staff Cal!..");
 					return false;
 				}
 				
 				if (username.getText() == null || username.getText().isEmpty()) {
-					
-					System.out.println("NO USERNAME ENTERED...");
+					loadDialog("ER: EMPTY FIELD", "No UserName Entered!..");
 					return false;
 				}
 						
 				if (password.getText() == null || password.getText().isEmpty()) {
-					System.out.println("NO PASSWORD ENTERED...");
+					loadDialog("ER: EMPTY FIELD", "No PassWord Entered!..");
 					return false;
 				}
 				
 				if (store.getSelectionModel().isEmpty()) {
-					System.out.println("NO STORE SELECTED...");
+					loadDialog("ER: EMPTY FIELD", "No Store Selected!..");
 					return false;
 				}
 			}
@@ -358,7 +360,24 @@ public class PersonController {
 
 
 	
-	
+	private void loadDialog(String title, String msg) {
+		
+		JFXDialogLayout content = new JFXDialogLayout();
+		content.setHeading(new Text(title));
+		content.setBody   (new Text(msg  ));
+		
+		
+		JFXDialog jDialog = new JFXDialog(dialogPane, content, JFXDialog.DialogTransition.TOP);
+		
+		JFXButton button = new JFXButton("OKEY");
+		button.setButtonType(JFXButton.ButtonType.RAISED);
+		button.setStyle("-fx-background-color: lightgrey");
+		button.setOnAction(e -> { jDialog.close(); });
+		
+		content.setActions(button);
+		
+		jDialog.show();
+	}
 	
 	
 	
