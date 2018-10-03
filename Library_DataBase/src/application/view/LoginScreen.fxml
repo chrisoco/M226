@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.LoginController">
+<AnchorPane prefHeight="780.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.LoginController">
    <children>
-      <Label layoutX="576.0" layoutY="222.0" text="LIBRARY LOGIN" textAlignment="CENTER" textFill="#2911c3" underline="true" AnchorPane.bottomAnchor="650.0">
+      <Label layoutX="451.0" layoutY="77.0" text="LIBRARY LOGIN" textAlignment="CENTER" textFill="#2911c3" underline="true" AnchorPane.bottomAnchor="550.0" AnchorPane.leftAnchor="475.0" AnchorPane.rightAnchor="475.0">
          <font>
             <Font size="36.0" />
          </font>
@@ -20,7 +20,7 @@
             <Glow />
          </effect>
       </Label>
-      <StackPane fx:id="dialogPane" layoutX="500.0" layoutY="275.0" prefHeight="300.0" prefWidth="400.0">
+      <StackPane fx:id="dialogPane" layoutX="500.0" layoutY="275.0" prefHeight="300.0" prefWidth="400.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
          <children>
             <JFXTextField fx:id="userLoginNameField" prefColumnCount="20" promptText="USER NAME">
                <StackPane.margin>
