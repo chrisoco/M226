@@ -1,3 +1,14 @@
+/**
+ *  @author Chris O'Connor
+ *  @author Umut Savas
+ *  
+ *  TODO:
+ *  	1) Check UserName UNIQUE ? MarkField Green / Red
+ *  	2) Comment All
+ *  	3) Are there Improvements?
+ *  
+ */
+
 package application.view.tab.person;
 
 import java.time.LocalDate;
@@ -309,7 +320,7 @@ public class PersonController {
 	
 	
 	
-	private boolean basicInputCheck() { // TODO: Highlight wrong Input?
+	private boolean basicInputCheck() {
 		
 		if (firstName.getText().isEmpty() || lastName   .getText().isEmpty() || 
 			street   .getText().isEmpty() || houseNumber.getText().isEmpty() ||
@@ -322,7 +333,7 @@ public class PersonController {
 		return true;
 	}
 	
-	private boolean advInputCheck() {   // TODO: MAYBE CREATE User MSG?
+	private boolean advInputCheck() {
 		
 		if (basicInputCheck()) {
 			/** CUSTOMER CALENDER TEST **/
@@ -358,8 +369,6 @@ public class PersonController {
 		return false;
 	}
 
-
-	
 	private void loadDialog(String title, String msg) {
 		
 		JFXDialogLayout content = new JFXDialogLayout();
