@@ -66,8 +66,6 @@ public class Main extends Application {
 			LoginController loginCon = loader.getController();
 	        loginCon.setMainApp(this);
 			
-//			((LoginController) loader.getController()).setMainApp(this);
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -83,11 +81,6 @@ public class Main extends Application {
 			
 			// Set LoginScreen into center of root layout.
 			rootLayout.setCenter(WorkLayout);
-			
-			// Give Access to Main:
-//			loader.setLocation(Main.class.getResource("view/tab/person/PersonController.fxml"));
-//			LoginController personCon = loader.getController();
-//	        personCon.setMainApp(this);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

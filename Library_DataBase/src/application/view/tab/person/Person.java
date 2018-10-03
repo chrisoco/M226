@@ -1,7 +1,5 @@
 package application.view.tab.person;
 
-import application.Main;
-
 public class Person {
 
 	private int ID, address_id, store_id;
@@ -39,18 +37,9 @@ public class Person {
 	}
 	
 	
-	public boolean insertIntoDB() {
-		this.ID = Main.db.insertBasicPerson(firstName, lastName, houseNumber, tel, email, address_id);
-		if (this.ID > 0) return true;
-		return false;
-	}
 
-	
-	public boolean updateBasicInfo() {
-		return Main.db.updateBasicPerson();
-	}
-	
-	
+
+
 	
 	public int getID() {
 		return ID;
@@ -148,25 +137,15 @@ public class Person {
 	public void setStaff(boolean staff) {
 		Staff = staff;
 	}
-
-
-
 	public int getAddress_id() {
 		return address_id;
 	}
-
-
-
 	public void setAddress_id(int address_id) {
 		this.address_id = address_id;
 	}
-
-
 	public int getStore_id() {
 		return store_id;
 	}
-
-
 	public void setStore_id(int store_id) {
 		this.store_id = store_id;
 	}

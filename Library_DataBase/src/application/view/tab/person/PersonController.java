@@ -3,6 +3,7 @@ package application.view.tab.person;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -11,7 +12,6 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 
-import application.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -44,16 +44,16 @@ public class PersonController {
 	
 	
 	
+	private SQLPerson SQL = new SQLPerson();
+	
 	private ArrayList<Person> personSearchList;
 	
 	
 	@FXML
 	public void initialize() {
-		//storeLocation.getItems().removeAll(storeLocation.getItems());
 		
-		store.getItems().addAll(Main.db.getStores());
-//		storeLocation.getSelectionModel().select(1);
-//		storeLocation.getSelectionModel().select(null);
+		store.getItems().addAll(SQL.getStores());
+
 	}
 	
 	
@@ -66,7 +66,7 @@ public class PersonController {
 		
 		if (!userSearch.getText().isEmpty()) {
 			
-			personSearchList = Main.db.loadPersonSearchData(userSearch.getText());
+			personSearchList = SQL.loadPersonSearchData(userSearch.getText());
 			
 			for (Person p : personSearchList) {
 				personListView.getItems().add(new Label(p.getNameLabel()));
@@ -96,7 +96,7 @@ public class PersonController {
 		if (listIndex >= 0) {
 			Person p = personSearchList.get(listIndex);
 			
-			if (p.getStreet() == null || p.getStreet().isEmpty()) Main.db.loadPersonData(p);
+			if (p.getStreet() == null || p.getStreet().isEmpty()) SQL.loadPersonData(p);
 			
 			setBasicPersonLabel(p);
 			
@@ -144,8 +144,7 @@ public class PersonController {
 		username.setDisable(active);
 		password.setDisable(active);
 		staffCal.setDisable(active);
-		
-		store.setDisable(active);
+		store   .setDisable(active);
 	}
 	
 	@FXML
@@ -186,7 +185,7 @@ public class PersonController {
 	
 	@FXML
 	private void autoFill() {
-		String [] result = Main.db.getAutoFill(plz.getText());
+		String [] result = SQL.getAutoFill(plz.getText());
 		
 		city   .setText(result[0]);
 		country.setText(result[1]);
@@ -204,32 +203,33 @@ public class PersonController {
 	
 	private int getAddressID(String countryName, String plzID, String cityName, String streetName) {
 		
-		Main.db.newCity(plzID, cityName, Main.db.newCountry(countryName));
+		SQL.newCity(plzID, cityName, SQL.newCountry(countryName));
 
-		return Main.db.newAddress(streetName, plzID);
+		return SQL.newAddress(streetName, plzID);
 		
 	}
 	
 	private void addNewPersonToDB() {
 		
-		int address_id = getAddressID(country.getText(),    plz.getText(), 
+		int addressID = getAddressID(country.getText(),    plz.getText(), 
 										 city.getText(), street.getText());
 		
 		// CREATE NEW PERSON
 		Person p = new Person(firstName.getText(), lastName.getText(), 
 							houseNumber.getText(),      tel.getText(), 
-							email      .getText(), address_id);
+							email      .getText(), addressID);
 		
-		boolean completedPerson = p.insertIntoDB();
+		p.setID(SQL.insertBasicPerson(p));
 		
-		System.out.println("Person Added to DB: " + completedPerson);
+		
+		System.out.println("Person Added to DB: " + (p.getID() > 0));
 		// TODO: USER POPUP ... :)
 
 		if (isCustomer.isSelected()) {
 
 			// Insert to DB
-			boolean completedCustomer = Main.db.insertCustomer(
-					p.getID(), formatDateOfCal(customerCal.getValue()));
+			boolean completedCustomer = 
+					SQL.insertCustomer(p.getID(), formatDateOfCal(customerCal.getValue()));
 			
 			System.out.println("Customer Added to DB: " + completedCustomer);
 		}
@@ -237,10 +237,10 @@ public class PersonController {
 		if (isStaff.isSelected()) {
 			
 			// Insert to DB
-			boolean completedStaff = Main.db.insertStaff(
-										p.getID(), username.getText(), password.getText(), 
-										formatDateOfCal(staffCal.getValue()), 
-										store.getSelectionModel().getSelectedIndex() + 1);
+			boolean completedStaff = 
+					SQL.insertStaff(p.getID(), username.getText(), password.getText(), 
+											formatDateOfCal(staffCal.getValue()), 
+											store.getSelectionModel().getSelectedIndex() + 1);
 			
 			System.out.println("Staff Added to DB: " + completedStaff);
 		}
@@ -252,11 +252,16 @@ public class PersonController {
 		Person p = update(personSearchList.get(
 							personListView.getSelectionModel().getSelectedIndex()));
 		
-		p.updateBasicInfo(); // TODO : CONTINUE HERE
+		boolean basic = SQL.updateBasicPerson(p);
+		System.out.println("UPDATED BASIC INFO... : " + basic);
 		
+		/** CUSTOMER **/
+		boolean customer = SQL.updateCustomer(p.getID(), p.getCustomerCal(), p.isCustomer());
+		System.out.println("UPDATED CUSTOMER... : " + customer);
 		
-		
-		
+		/** STAFF **/
+		boolean staff = SQL.updateStaff(p);
+		System.out.println("UPDATED STAFF... : " + staff);
 		
 		
 	}
@@ -350,6 +355,9 @@ public class PersonController {
 		}
 		return false;
 	}
+
+
+	
 	
 	
 	

@@ -1,64 +1,29 @@
-package application;
+package application.view.tab.person;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import application.view.tab.person.Person;
+import application.Main;
 
-public class DB {
-	
+public class SQLPerson {
+
 	private Connection DBCon;
 	private Statement  st;
 	private ResultSet  rs;
-
-	private String jdbcUrl  = "jdbc:mysql://localhost/m153?";
-	
-	private String settings = "useSSL=false&"
-							+ "useUnicode=true&"
-							+ "useJDBCCompliantTimezoneShift=true&"
-							+ "useLegacyDatetimeCode=false&"
-							+ "serverTimezone=UTC";
-	
-	private int staff_ID;
 	
 	
-	public DB() {
+	public SQLPerson() {
 		try {
-			this.DBCon = DriverManager.getConnection(jdbcUrl+settings, "JavaApp", "javaapp");
+			this.DBCon = Main.db.getDBCon();
 			this.st    = DBCon.createStatement();
 			
-		} catch (SQLException e) {
-			System.out.println("Connection FAILED ...");
-		}
-
+		} catch (SQLException e) {}
 		
 	}
 	
-	
-	public boolean login(String userName, String userPW) {
-		
-		String query = "SELECT tbl_person_fk, password FROM m153.tbl_staff " + 
-						"WHERE username = '" + userName + "';";
-		
-		try {
-			rs = st.executeQuery(query);
-			
-			if(rs.next()) {
-				if (rs.getString("password").equals(userPW)) {
-					staff_ID = rs.getInt("tbl_person_fk");
-					return true;
-				}
-			}
-			
-		} 
-		catch (SQLException e) {}
-		
-		return false;
-	}
 	
 	
 	public ArrayList<String> getStores(){
@@ -95,9 +60,14 @@ public class DB {
 		
 		ArrayList<Person> searchResult = new ArrayList<Person>();
 		
-		String query = "SELECT * FROM m153.tbl_person "
-					 + "WHERE lastName LIKE '" + userSearch + "%'"
-					 + "ORDER BY lastName, firstName;";
+		String query =    "SELECT "
+							+ "* "
+						+ "FROM "
+							+ "m153.tbl_person "
+						+ "WHERE "
+							+ "lastName LIKE '" + userSearch + "%'"
+						+ "ORDER BY "
+							+ "lastName, firstName;";
 		
 		int i = 0;
 		
@@ -105,7 +75,7 @@ public class DB {
 			rs = st.executeQuery(query);
 		
 			while (rs.next()) {
-				if(i > 10) break;
+				if(i > 15) break;
 				
 				searchResult.add(new Person(rs.getInt("person_id"), rs.getString("firstName"), rs.getString("lastName")));
 				
@@ -153,13 +123,13 @@ public class DB {
 			rs = st.executeQuery(basic);
 			rs.next();
 			
-			p.setEmail   (rs.getString("email"));
-			p.setTel     (rs.getString("tel"));
-			p.setStreet  (rs.getString("street"));
+			p.setEmail      (rs.getString("email"   ));
+			p.setTel        (rs.getString("tel"     ));
+			p.setStreet     (rs.getString("street"  ));
 			p.setHouseNumber(rs.getString("str_nmbr"));
-			p.setPlz     (rs.getString("plz"));
-			p.setCity    (rs.getString("city"));
-			p.setCountry (rs.getString("country"));
+			p.setPlz        (rs.getString("plz"     ));
+			p.setCity       (rs.getString("city"    ));
+			p.setCountry    (rs.getString("country" ));
 			
 			
 			rs = st.executeQuery(customer);
@@ -172,32 +142,29 @@ public class DB {
 			rs = st.executeQuery(staff);
 			if (rs.next()) {
 				p.setStaff(true);
-				p.setUsername(rs.getString("username"));
-				p.setPassword(rs.getString("password"));
-				p.setStaffCal(rs.getString("since"));
+				p.setUsername(rs.getString("username"    ));
+				p.setPassword(rs.getString("password"    ));
+				p.setStaffCal(rs.getString("since"       ));
 				p.setStore_id(rs.getInt   ("tbl_store_fk"));
 			}
 			
-			
-			
-			
-			} catch (SQLException e) {
-				System.out.println(e);
-			}
+			} catch (SQLException e) {}
 		
 	}
 	
 	
 	public String [] getAutoFill(String plz) {
 		
-		String query = 	"SELECT "
+		String query = 	  "SELECT "
 							+ "c.city_plz_id AS plz, c.cityName AS city, co.countryName AS country "
-							+ "FROM tbl_city AS c "
+						+ "FROM tbl_city AS c "
 						
 							+ "LEFT JOIN tbl_country AS co "
 							+ "ON c.tbl_country_fk = co.country_id "
 					  
-					  + "WHERE c.city_plz_id = " + plz +";";
+						+ "WHERE"
+							+ " c.city_plz_id = " + plz +";";
+		
 		
 		String [] result = {"", ""};
 		
@@ -217,13 +184,13 @@ public class DB {
 	
 	public int newCountry(String countryName) {
 		
-		String search = "SELECT "
-					  + "country_id FROM tbl_country "
-					  + "WHERE countryName = '" + countryName + "';";
+		String search =       "SELECT "
+					  		+ "country_id FROM tbl_country "
+					  		+ "WHERE countryName = '" + countryName + "';";
 		
-		String newCountry = "INSERT INTO "
-						  + "tbl_country(countryName) "
-						  + "VALUE ('" + countryName + "');";
+		String newCountry =   "INSERT INTO "
+						  	+ "tbl_country(countryName) "
+						  	+ "VALUE ('" + countryName + "');";
 		
 		try {
 			rs = st.executeQuery(search);
@@ -244,13 +211,13 @@ public class DB {
 	
 	public void newCity(String city_plz_id, String cityName, int country_id) {
 		
-		String search = "SELECT "
-					  + "* FROM tbl_city "
-					  + "WHERE city_plz_id = " + city_plz_id + ";";
+		String search =       "SELECT "
+					  		+ "* FROM tbl_city "
+					  		+ "WHERE city_plz_id = " + city_plz_id + ";";
 		
-		String newCountry = "INSERT INTO "
-				  		  + "tbl_city VALUES "
-				  		  + "('" + city_plz_id + "', '" + cityName + "', '" + country_id + "');";
+		String newCountry =   "INSERT INTO "
+				  		  	+ "tbl_city VALUES "
+				  		  	+ "('" + city_plz_id + "', '" + cityName + "', '" + country_id + "');";
 		
 		try {
 			rs = st.executeQuery(search);
@@ -272,13 +239,13 @@ public class DB {
 	
 	public int newAddress(String streetName, String city_plz_fk) {
 		
-		String search = "SELECT "
-				  	  + "address_id FROM tbl_address "
-				  	  + "WHERE street = '" + streetName + "';";
+		String search =       "SELECT "
+				  	  		+ "address_id FROM tbl_address "
+				  	  		+ "WHERE street = '" + streetName + "';";
 		
-		String newAddress = "INSERT INTO "
-				  		  + "tbl_address(street, tbl_city_fk) "
-				  		  + "VALUES ('" + streetName + "', '" + city_plz_fk + "');";
+		String newAddress =   "INSERT INTO "
+				  		  	+ "tbl_address(street, tbl_city_fk) "
+				  		  	+ "VALUES ('" + streetName + "', '" + city_plz_fk + "');";
 		
 		try {
 			rs = st.executeQuery(search);
@@ -297,28 +264,27 @@ public class DB {
 	}
 	
 	
-	public int insertBasicPerson(String firstName, String lastName, String str_nmbr, 
-							String tel      , String email   , int address_id) {
+	public int insertBasicPerson(Person p) {
 		
 		String query = "INSERT "
 						+ "INTO tbl_person "
 							+ "(firstName, lastName, email, tel, tbl_address_fk, str_nmbr) "
 						+ "VALUES "
-							+ "('" + firstName + "', '" + lastName + "', '" + email + "', '" + tel + "', '" + address_id + "', '" + str_nmbr + "');";
+							+ "('" + p.getFirstName() + "', '" + p.getLastName() + "', '" + p.getEmail() + "', '" + p.getTel() + "', '" + p.getAddress_id() + "', '" + p.getHouseNumber() + "');";
 		
 		
 		String getID = "SELECT "
 					 	+ "person_id FROM tbl_person "
 					 + "WHERE "
-					 	+ "firstName = '" + firstName + "' AND "
-					 	+ "lastName  = '" + lastName  + "' AND "
-					 	+ "str_nmbr  = '" + str_nmbr  + "' AND "
-					 	+ "tel       = '" + tel       + "';";
+					 	+ "firstName = '" + p.getFirstName()   + "' AND "
+					 	+ "lastName  = '" + p.getLastName()    + "' AND "
+					 	+ "str_nmbr  = '" + p.getHouseNumber() + "' AND "
+					 	+ "tel       = '" + p.getTel()         + "';";
 		
 		insert(query);
 		
 		try {
-			rs = st.executeQuery (getID );
+			rs = st.executeQuery(getID);
 			
 			if (rs.next()) return rs.getInt("person_id");
 			
@@ -336,47 +302,125 @@ public class DB {
 					 + "VALUES "
 					 + "('" + ID + "', '" + since + "');";
 		
-		if (insert(query) == 1) return true;
-
-		return false;
+		
+		return (insert(query) == 1) ? true : false;
 	}
 	
 	
 	public boolean insertStaff(int ID, String userName, String password, String since, int storeID) {
 		
-		String query = "INSERT "
+		String query =    "INSERT "
 						+ "INTO tbl_staff "
 							+ "(tbl_person_fk, username, password, wage, since, tbl_store_fk) "
 						+ "VALUES "
 							+ "('" + ID + "', '" + userName + "', '" + password 
 							+ "', '8000.00' , '" + since    + "', '" + storeID + "');";
 		
-		if(insert(query) == 1) return true;
+		
+		return (insert(query) == 1) ? true : false;
+	}
+	
+	
+	public boolean updateBasicPerson(Person p) {
+		
+		String query =    "UPDATE "
+							+ "tbl_person "
+						+ "SET "
+							+ "firstName = '"      + p.getFirstName()   + "', "
+							+ "lastName = '"       + p.getLastName()    + "', "
+							+ "email = '"          + p.getEmail()       + "', "
+							+ "tel = '"            + p.getTel()         + "', "
+							+ "tbl_address_fk = '" + p.getAddress_id()  + "', "
+							+ "str_nmbr = '"       + p.getHouseNumber() + "' "
+						+ "WHERE "
+							+ "(person_id = '" + p.getID() + "');";
+		
+
+		return (insert(query) == 1) ? true : false; 
+	}
+	
+	
+	public boolean updateCustomer(int ID, String date, boolean isCustomer) {
+		
+		String query =    "SELECT "
+							+ "* FROM tbl_customer "
+						+ "WHERE "
+							+ "tbl_person_fk = '" + ID + "';";
+		
+		
+		String update =   "UPDATE "
+							+ "tbl_customer "
+						+ "SET "
+							+ "since = '" + date + "' "
+						+ "WHERE "
+							+ "(tbl_person_fk = '" + ID + "');";
+		
+		
+		String delete =   "DELETE "
+							+ "FROM tbl_customer "
+						+ "WHERE "
+							+ "(tbl_person_fk = '" + ID + "');";
+		
+		
+		try {
+			rs = st.executeQuery(query);
+			
+			if (rs.next()) {
+				if(isCustomer) return (insert(update) == 1) ? true : false;
+				else           return (insert(delete) == 1) ? true : false;
+				
+			} else {
+
+				return (isCustomer) ? insertCustomer(ID, date) : true;
+			}
+			
+			
+		} catch (SQLException e) {}
 		
 		return false;
 	}
 	
 	
-	public boolean updateBasicPerson() {
+	public boolean updateStaff(Person p) {
+		
+		String query =    "SELECT "
+							+ "tbl_person_fk FROM tbl_staff "
+						+ "WHERE "
+							+ "tbl_person_fk = '" + p.getID() + "';";
+		
+		String update =   "UPDATE "
+							+ "tbl_staff "
+						+ "SET "
+							+ "username = '"       + p.getUsername() + "', "
+							+ "password = '"       + p.getPassword() + "', "
+							+ "since = '"          + p.getStaffCal()    + "', "
+							+ "tbl_store_fk = '"   + p.getStore_id()  + "' "
+						+ "WHERE "
+							+ "(tbl_person_fk = '" + p.getID() + "');";
 		
 		
+		String delete =   "DELETE "
+							+ "FROM tbl_staff "
+						+ "WHERE "
+							+ "(tbl_person_fk = '" + p.getID() + "');";
 		
 		
-		
-		
-		
+		try {
+			rs = st.executeQuery(query);
+			
+			if (rs.next()) {
+				if (p.isStaff()) return (insert(update) == 1) ? true : false;
+				else         return (insert(delete) == 1) ? true : false;
+				
+			} else {
+				
+				return (p.isStaff()) ? insertStaff(p.getID(), p.getUsername(), p.getPassword(), p.getStaffCal(), p.getStore_id()) : true;
+			}
+				
+		} catch (SQLException e) {}
 		
 		return false;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	private int insert(String query) {
@@ -387,35 +431,6 @@ public class DB {
 		return 0;
 	}
 	
-	public int getStaff_ID() {
-		return staff_ID;
-	}
-	public void setStaff_ID(int staff_ID) {
-		this.staff_ID = staff_ID;
-	}
-	
-	
-	
-	
-	
-	
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
