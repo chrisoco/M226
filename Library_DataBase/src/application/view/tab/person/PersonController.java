@@ -212,7 +212,8 @@ public class PersonController {
 	private void updateDB() {
 		
 		if (advInputCheck()) {
-			if (isNewPerson.isSelected()) addNewPersonToDB();
+			if (isNewPerson.isSelected() || 
+			 personListView.getSelectionModel().getSelectedIndex() == -1) addNewPersonToDB();
 			else                          updatePersonInDB();
 		}
 		
