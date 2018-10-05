@@ -4,7 +4,6 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXListView?>
-<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
@@ -26,7 +25,7 @@
                <children>
                   <BorderPane prefHeight="860.8" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <top>
-                        <JFXTextField fx:id="userSearch" labelFloat="true" onKeyReleased="#loadPersonSearchData" promptText="SEARCH" BorderPane.alignment="CENTER">
+                        <JFXTextField fx:id="bookSearch" labelFloat="true" onKeyReleased="#loadPersonSearchData" promptText="SEARCH" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -36,7 +35,7 @@
                         </JFXTextField>
                      </top>
                      <center>
-                        <JFXListView fx:id="personListView" onMouseClicked="#loadPersonToLabel" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold;" BorderPane.alignment="CENTER">
+                        <JFXListView fx:id="bookListView" onMouseClicked="#loadPersonToLabel" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold;" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets top="40.0" />
                            </BorderPane.margin>
@@ -70,7 +69,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <JFXTextField fx:id="firstName" labelFloat="true" promptText="First Name">
+                              <JFXTextField fx:id="title" labelFloat="true" promptText="Title">
                                  <GridPane.margin>
                                     <Insets left="40.0" right="40.0" />
                                  </GridPane.margin>
@@ -78,7 +77,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </JFXTextField>
-                              <JFXTextField fx:id="lastName" labelFloat="true" promptText="Last Name" GridPane.rowIndex="1">
+                              <JFXTextField fx:id="description" labelFloat="true" promptText="Description" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -86,39 +85,7 @@
                                     <Insets left="40.0" right="40.0" />
                                  </GridPane.margin>
                               </JFXTextField>
-                              <JFXTextField fx:id="street" labelFloat="true" promptText="Street" GridPane.rowIndex="2">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets left="40.0" right="120.0" />
-                                 </GridPane.margin>
-                              </JFXTextField>
-                              <JFXTextField fx:id="houseNumber" alignment="CENTER_RIGHT" labelFloat="true" promptText="Nr." GridPane.rowIndex="2">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets left="300.0" right="40.0" />
-                                 </GridPane.margin>
-                              </JFXTextField>
-                              <JFXTextField fx:id="plz" labelFloat="true" onKeyReleased="#autoFill" promptText="PLZ" GridPane.rowIndex="3">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets left="40.0" right="300.0" />
-                                 </GridPane.margin>
-                              </JFXTextField>
-                              <JFXTextField fx:id="city" alignment="CENTER_RIGHT" labelFloat="true" promptText="City" GridPane.rowIndex="3">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets left="120.0" right="40.0" />
-                                 </GridPane.margin>
-                              </JFXTextField>
-                              <JFXTextField fx:id="country" labelFloat="true" promptText="Country" GridPane.rowIndex="4">
+                              <JFXTextField fx:id="priceDay" labelFloat="true" prefHeight="30.0" prefWidth="174.0" promptText="Price day" GridPane.rowIndex="3">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -126,7 +93,7 @@
                                     <Insets left="40.0" right="40.0" />
                                  </GridPane.margin>
                               </JFXTextField>
-                              <JFXTextField fx:id="tel" labelFloat="true" promptText="Tel" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <JFXTextField fx:id="priceReplace" labelFloat="true" onKeyReleased="#autoFill" promptText="Price replace" GridPane.rowIndex="4">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -134,49 +101,16 @@
                                     <Insets left="40.0" right="40.0" />
                                  </GridPane.margin>
                               </JFXTextField>
-                              <JFXTextField fx:id="email" labelFloat="true" promptText="E-Mail" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
+                              <JFXDatePicker fx:id="releaseDate" disable="true" prefWidth="350.0" promptText="Release date" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                  <GridPane.margin>
                                     <Insets left="40.0" right="40.0" />
-                                 </GridPane.margin>
-                              </JFXTextField>
-                              <JFXToggleButton fx:id="isCustomer" alignment="CENTER_RIGHT" contentDisplay="RIGHT" onAction="#setCustomerCalActiveState" prefWidth="400.0" text="Customer" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                                 </GridPane.margin></JFXDatePicker>
+                              <JFXToggleButton fx:id="isNewBook" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="New Book" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </JFXToggleButton>
-                              <JFXDatePicker fx:id="customerCal" disable="true" prefWidth="350.0" promptText="Customer Since" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                              <JFXToggleButton fx:id="isStaff" alignment="CENTER_RIGHT" contentDisplay="RIGHT" onAction="#setStaffCalActiveState" prefWidth="400.0" text="Staff" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="6">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </JFXToggleButton>
-                              <JFXDatePicker fx:id="staffCal" disable="true" prefWidth="350.0" promptText="Staff Since" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
-                              <JFXTextField fx:id="username" disable="true" labelFloat="true" promptText="User Login" GridPane.rowIndex="7">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets left="40.0" right="40.0" />
-                                 </GridPane.margin>
-                              </JFXTextField>
-                              <JFXPasswordField fx:id="password" disable="true" labelFloat="true" promptText="Password" GridPane.rowIndex="8">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <GridPane.margin>
-                                    <Insets left="40.0" right="40.0" />
-                                 </GridPane.margin>
-                              </JFXPasswordField>
-                              <JFXComboBox fx:id="store" disable="true" labelFloat="true" prefWidth="300.0" promptText="Store + Location" style="-fx-font-size: 14; -fx-font-family: Monospaced;" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-                              <JFXToggleButton fx:id="isNewPerson" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="New Person" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </JFXToggleButton>
-                              <JFXButton fx:id="personSubmit" buttonType="RAISED" onAction="#updateDB" prefHeight="40.0" prefWidth="300.0" ripplerFill="#08d712" style="-fx-background-color: lightgray;" text="SUBMIT" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+                              <JFXButton fx:id="bookSubmit" buttonType="RAISED" onAction="#updateDB" prefHeight="40.0" prefWidth="300.0" ripplerFill="#08d712" style="-fx-background-color: lightgray;" text="SUBMIT" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -186,6 +120,31 @@
                                     <Font size="14.0" />
                                  </font>
                               </JFXButton>
+                              <JFXComboBox fx:id="rating" labelFloat="true" prefHeight="25.0" prefWidth="337.0" promptText="Rating" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="40.0" right="40.0" />
+                                 </GridPane.margin>
+                              </JFXComboBox>
+                              <JFXComboBox fx:id="publisher" labelFloat="true" prefHeight="25.0" prefWidth="337.0" promptText="Publisher" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="40.0" right="40.0" />
+                                 </GridPane.margin>
+                              </JFXComboBox>
+                              <JFXComboBox fx:id="author" labelFloat="true" prefHeight="25.0" prefWidth="351.0" promptText="Author" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="40.0" right="40.0" />
+                                 </GridPane.margin>
+                              </JFXComboBox>
+                              <JFXComboBox fx:id="language" labelFloat="true" prefHeight="25.0" prefWidth="351.0" promptText="Language" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="40.0" right="40.0" />
+                                 </GridPane.margin>
+                              </JFXComboBox>
+                              <JFXComboBox fx:id="category" labelFloat="true" prefHeight="25.0" prefWidth="351.0" promptText="Category" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="40.0" right="40.0" />
+                                 </GridPane.margin>
+                              </JFXComboBox>
                            </children>
                            <padding>
                               <Insets top="20.0" />
