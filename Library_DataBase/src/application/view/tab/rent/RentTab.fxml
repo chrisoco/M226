@@ -37,7 +37,7 @@
             <JFXListView fx:id="bookListView" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold;" BorderPane.alignment="CENTER" />
          </center>
          <top>
-            <JFXTextField fx:id="bookSearch" labelFloat="true" promptText="SEARCH BOOK" BorderPane.alignment="CENTER">
+            <JFXTextField fx:id="bookSearch" labelFloat="true" onKeyReleased="#loadBookSearchData" promptText="SEARCH BOOK" BorderPane.alignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>

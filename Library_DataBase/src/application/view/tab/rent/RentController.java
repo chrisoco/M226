@@ -8,7 +8,6 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 
-import application.view.tab.book.Book;
 import application.view.tab.person.Person;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -16,7 +15,7 @@ import javafx.scene.control.Label;
 public class RentController {
 
 	@FXML
-	JFXTextField personSearch, bookSearch, name;
+	JFXTextField personSearch, bookSearch, personName;
 	
 	@FXML
 	JFXListView<Label> personListView, bookListView, rentOfPersonListView, rentCurrentListView;
@@ -33,8 +32,9 @@ public class RentController {
 	
 	private SQLRent SQL = new SQLRent();
 	
-	private ArrayList<Person> personSearchList;
-	private ArrayList<Book> bookSearchList; // TODO: create Class Book :)
+	private ArrayList<Person>    personSearchList;
+	private ArrayList<Inventory> inventorySearchList; // TODO: create Class Book :)
+	private Person customer;
 	
 	
 	@FXML
@@ -44,7 +44,8 @@ public class RentController {
 
 	}
 	
-	
+
+	/** BOOK **/ 
 	@FXML
 	private void loadPersonSearchData() {
 		
@@ -61,11 +62,35 @@ public class RentController {
 		
 	}
 	
+				/** BOOK **/ 
+	@FXML
+	private void loadBookSearchData() {
+		
+		bookListView.getItems().clear();
+		
+		if (!bookSearch.getText().isEmpty()) {
+			
+			inventorySearchList = SQL.loadBookSearchData("BOOK " + bookSearch.getText());
+			
+			for (Inventory i : inventorySearchList) {
+				bookListView.getItems().add(new Label(i.getbTitle()));
+			}
+		} 
+		
+	}
 	
 	
-	
-	
-	
+	@FXML
+	private void loadPersonToLabel() {
+		
+		int listIndex = personListView.getSelectionModel().getSelectedIndex();
+		
+		if (listIndex >= 0) {
+			customer = personSearchList.get(listIndex);
+			personName.setText(customer.getLastName() + " " + customer.getFirstName());
+			
+		}
+	}
 	
 	
 	

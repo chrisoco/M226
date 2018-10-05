@@ -90,7 +90,37 @@ public class SQLRent {
 	
 	
 	
-	
+	public ArrayList<Inventory> loadBookSearchData(String userSearch) {
+		
+		ArrayList<Inventory> searchResult = new ArrayList<>();
+		
+		String query =    "SELECT "
+							+ "book_id, title "
+						+ "FROM "
+							+ "tbl_book "
+						+ "WHERE "
+							+ "title LIKE '" + userSearch + "%'"
+						+ "ORDER BY "
+							+ "title;";
+		
+		int i = 0;
+		
+		try {
+			rs = st.executeQuery(query);
+		
+			while (rs.next()) {
+				if(i > 15) break;
+				
+				searchResult.add(new Inventory(rs.getInt(""), rs.getInt(""), rs.getString(""))); // TODO
+				
+				i++;
+			}
+		
+		} catch (SQLException e) {}
+		
+		
+		return searchResult;
+	}
 	
 	
 	
