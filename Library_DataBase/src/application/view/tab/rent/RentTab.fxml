@@ -27,7 +27,7 @@
             </JFXTextField>
          </top>
          <center>
-            <JFXListView fx:id="personListView" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold;" BorderPane.alignment="CENTER" />
+            <JFXListView fx:id="personListView" onMouseClicked="#loadPersonToLabel" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </left>
@@ -70,7 +70,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXTextField fx:id="name" editable="false" labelFloat="true" promptText="NAME">
+                        <JFXTextField fx:id="customerName" labelFloat="true" promptText="Customer Name">
                            <GridPane.margin>
                               <Insets left="40.0" right="40.0" />
                            </GridPane.margin>

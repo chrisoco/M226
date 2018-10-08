@@ -90,30 +90,27 @@ public class SQLRent {
 	
 	
 	
-	public ArrayList<Inventory> loadBookSearchData(String userSearch) {
+	public ArrayList<Inventory> loadBookSearchData(String userSearch, int store) {
 		
 		ArrayList<Inventory> searchResult = new ArrayList<>();
 		
-		String query =    "SELECT "
-							+ "book_id, title "
-						+ "FROM "
-							+ "tbl_book "
-						+ "WHERE "
-							+ "title LIKE '" + userSearch + "%'"
-						+ "ORDER BY "
-							+ "title;";
-		
-		int i = 0;
+		String query = "SELECT " 
+						+ "COUNT(b.book_id) AS anz, b.book_id, b.title "
+						+ "FROM tbl_inventory AS i " 
+						
+						+ "LEFT JOIN tbl_book AS b "
+						+ "ON i.tbl_book_fk = b.book_id "
+						
+						+ "WHERE i.tbl_store_fk = '" + store + "' AND b.title LIKE '" + userSearch + "%' "
+						
+						+ "GROUP BY b.title "
+						+ "ORDER BY b.title;";
 		
 		try {
 			rs = st.executeQuery(query);
 		
 			while (rs.next()) {
-				if(i > 15) break;
-				
-				searchResult.add(new Inventory(rs.getInt(""), rs.getInt(""), rs.getString(""))); // TODO
-				
-				i++;
+				searchResult.add(new Inventory(rs.getInt("book_id"), rs.getInt("anz"), rs.getString("title")));
 			}
 		
 		} catch (SQLException e) {}
@@ -123,7 +120,48 @@ public class SQLRent {
 	}
 	
 	
-	
+	public ArrayList<Inventory> loadBookRentData(int store, String startDate, String endDate) {
+		
+		ArrayList<Inventory> searchResult = new ArrayList<>();
+		
+		String query = "SELECT "
+						+ "COUNT(i.tbl_book_fk) AS anz, i.tbl_book_fk AS book_id "
+						+ "FROM tbl_listOfRentalBooks AS l " 
+						
+						+ "LEFT JOIN tbl_rental AS r "
+						+ "ON l.tbl_rental_fk = r.rental_id "
+						
+						+ "LEFT JOIN tbl_inventory AS i "
+						+ "ON l.tbl_inventory_fk = i.inventory_id "
+						
+						+ "WHERE i.tbl_store_fk = '" + store + "' AND ( "
+							+ "(endRental = null) OR "
+							+ "('2018-10-20' >= startRental AND '2018-10-20' <= endRental) OR "
+							+ "('2018-10-08' <= endRental AND '2018-10-08' >= startRental) OR "
+							+ "('2018-10-08' <= startRental AND '2018-10-20' >= endRental) "
+						/*
+						 *  TODO CONTINUE HERE 
+						 *  
+						 *  -- END   = 2018-10-20
+						 *  -- START = 2018-10-08
+						 *  
+						 */
+						+ ") GROUP BY book_id;";
+		
+		try {
+			rs = st.executeQuery(query);
+		
+			while (rs.next()) {
+				searchResult.add(new Inventory(rs.getInt("book_id"), rs.getInt("anz")));
+			}
+		
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		
+		
+		return searchResult;
+	}
 	
 	
 	
