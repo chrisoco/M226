@@ -62,7 +62,7 @@ public class BookController implements Initializable {
 
         if (!bookSearch.getText().isEmpty()) {
 
-            bookSearchList = SQL.loadBookSearchData(bookSearch.getText());
+//            bookSearchList = SQL.loadBookSearchData(bookSearch.getText());
 
             for (Book b : bookSearchList) {
                 bookListView.getItems().add(new Label(b.getTitle()));
@@ -84,6 +84,6 @@ public class BookController implements Initializable {
         description     .setText(b.getDescription());
         //releaseDate
         rating          .setText(String.valueOf(b.getRating()));
-        priceDay        .setText();
+//        priceDay        .setText();
     }
 }
