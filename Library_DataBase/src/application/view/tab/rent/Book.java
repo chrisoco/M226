@@ -1,24 +1,33 @@
 package application.view.tab.rent;
 
-public class Inventory {
+public class Book {
 
 	private int invID, bID, anz;
-	private String bTitle;
+	private String bTitle, price_day;
 	
 	
-	public Inventory(int bID, int anz, String bTitle) {
+	public Book(int bID, int anz, String bTitle) {
 		
 		this.bID    = bID;
 		this.bTitle = bTitle;
 		this.anz    = anz;
 	}
 
-	public Inventory(int bID, int anz) {
+	public Book(int bID, int anz) {
 		
 		this.bID    = bID;
 		this.anz    = anz;
 	}
 	
+	public Book(int invID, int bID, String bTitle, String price_day) {
+		
+		this.invID     = invID;
+		this.bID       = bID;
+		this.bTitle    = bTitle;
+		this.price_day = price_day;
+		
+		
+	}
 	
 	
 	
@@ -26,6 +35,14 @@ public class Inventory {
 	public String toLabel() {
 		return String.format("%-20s (%d)", this.bTitle, this.anz);
 	}
+	
+	
+	public String toLabel2() {
+		return String.format("%-64s %10s.-", this.bTitle, this.price_day);
+	}
+	
+	
+	
 	
 	
 	public int getInvID() {
@@ -51,6 +68,14 @@ public class Inventory {
 	}
 	public void setAnz(int anz) {
 		this.anz = anz;
+	}
+
+	public String getPrice_day() {
+		return price_day;
+	}
+
+	public void setPrice_day(String price_day) {
+		this.price_day = price_day;
 	}
 	
 	

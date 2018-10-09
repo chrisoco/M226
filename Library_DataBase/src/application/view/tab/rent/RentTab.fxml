@@ -6,6 +6,7 @@
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -27,14 +28,14 @@
             </JFXTextField>
          </top>
          <center>
-            <JFXListView fx:id="personListView" onMouseClicked="#loadPersonToLabel" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold;" BorderPane.alignment="CENTER" />
+            <JFXListView fx:id="personListView" onMouseClicked="#loadPersonToLabel" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </left>
    <right>
       <BorderPane prefWidth="275.0" BorderPane.alignment="CENTER">
          <center>
-            <JFXListView fx:id="bookListView" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold;" BorderPane.alignment="CENTER" />
+            <JFXListView fx:id="bookListView" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
          </center>
          <top>
             <JFXTextField fx:id="bookSearch" labelFloat="true" onKeyReleased="#loadBookSearchData" promptText="SEARCH BOOK" BorderPane.alignment="CENTER">
@@ -50,12 +51,6 @@
    </right>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <center>
-            <JFXListView fx:id="rentOfPersonListView" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </BorderPane.margin></JFXListView>
-         </center>
          <top>
             <StackPane BorderPane.alignment="CENTER">
                <children>
@@ -78,12 +73,12 @@
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXDatePicker fx:id="rentalStartCal" maxWidth="1.7976931348623157E308" promptText="Rental Start Date" GridPane.rowIndex="1">
+                        <JFXDatePicker fx:id="rentalStartCal" editable="false" maxWidth="1.7976931348623157E308" onAction="#setExpCal" promptText="Rental Start Date" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="40.0" right="40.0" />
                            </GridPane.margin>
                         </JFXDatePicker>
-                        <JFXDatePicker fx:id="rentalExpCal" maxWidth="1.7976931348623157E308" promptText="Rental Expires Date" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <JFXDatePicker fx:id="rentalExpCal" maxWidth="1.7976931348623157E308" onAction="#loadBookSearchData" promptText="Rental Expires Date" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -91,17 +86,17 @@
                               <Insets left="40.0" right="40.0" />
                            </GridPane.margin>
                         </JFXDatePicker>
-                        <JFXDatePicker fx:id="rentalEndCal" maxWidth="1.7976931348623157E308" promptText="Rental END Date" GridPane.rowIndex="2">
+                        <JFXDatePicker fx:id="rentalEndCal" editable="false" maxWidth="1.7976931348623157E308" promptText="Rental END Date" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="40.0" right="40.0" />
                            </GridPane.margin>
                         </JFXDatePicker>
-                        <JFXComboBox fx:id="store" maxWidth="1.7976931348623157E308" promptText="Store + Location" GridPane.columnIndex="1">
+                        <JFXComboBox fx:id="store" maxWidth="1.7976931348623157E308" onAction="#loadBookSearchData" promptText="Store + Location" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets left="40.0" right="40.0" />
                            </GridPane.margin>
                         </JFXComboBox>
-                        <JFXButton fx:id="submit" buttonType="RAISED" prefHeight="40.0" prefWidth="100.0" ripplerFill="#f00909" text="SUBMIT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                        <JFXButton fx:id="submit" buttonType="RAISED" prefHeight="40.0" prefWidth="100.0" ripplerFill="LIME" style="-fx-background-color: lightgray;" text="SUBMIT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="40.0" />
                            </GridPane.margin>
@@ -109,7 +104,7 @@
                               <Font size="14.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="addBook" buttonType="RAISED" prefHeight="40.0" prefWidth="100.0" ripplerFill="#f00909" text="ADD Book" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                        <JFXButton fx:id="addBook" buttonType="RAISED" prefHeight="40.0" prefWidth="100.0" ripplerFill="LIME" style="-fx-background-color: lightgray;" text="ADD Book" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -125,8 +120,83 @@
                </children>
             </StackPane>
          </top>
+         <center>
+            <BorderPane BorderPane.alignment="CENTER">
+               <center>
+                  <JFXListView fx:id="rentOfPersonListView" onMouseClicked="#loadBooksOfRent" style="-fx-background-color: gray; -fx-font-family: Monospaced;" BorderPane.alignment="CENTER" />
+               </center>
+               <top>
+                  <Label text="All Rentuals:" BorderPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets left="10.0" />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets bottom="2.0" />
+                     </padding>
+                  </Label>
+               </top>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </BorderPane>
+         </center>
          <bottom>
-            <JFXListView fx:id="rentCurrentListView" prefHeight="350.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER" />
+            <BorderPane prefHeight="350.0" BorderPane.alignment="CENTER">
+               <center>
+                  <JFXListView fx:id="rentCurrentListView" style="-fx-background-color: gray; -fx-font-family: Monospaced;" BorderPane.alignment="CENTER" />
+               </center>
+               <top>
+                  <Label text="Selected Rent:" BorderPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets left="10.0" />
+                     </BorderPane.margin>
+                     <padding>
+                        <Insets bottom="2.0" />
+                     </padding>
+                  </Label>
+               </top>
+               <BorderPane.margin>
+                  <Insets top="5.0" />
+               </BorderPane.margin>
+               <bottom>
+                  <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="537.0" minWidth="10.0" prefWidth="512.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="138.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label style="-fx-font-weight: bold;" text="PRICE :" GridPane.halignment="RIGHT">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="rentPrice" editable="false" text="00.00 CHF" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="14.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </JFXTextField>
+                     </children>
+                     <BorderPane.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </BorderPane.margin>
+                  </GridPane>
+               </bottom>
+            </BorderPane>
          </bottom>
       </BorderPane>
    </center>

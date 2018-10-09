@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 public class RentController {
 
 	@FXML
-	JFXTextField personSearch, bookSearch, customerName;
+	JFXTextField personSearch, bookSearch, customerName, rentPrice;
 	
 	@FXML
 	JFXListView<Label> personListView, bookListView, rentOfPersonListView, rentCurrentListView;
@@ -34,9 +34,11 @@ public class RentController {
 	
 	private SQLRent SQL = new SQLRent();
 	
-	private ArrayList<Person>    personSearchList;
-	private ArrayList<Inventory> bookSearchList;
+	private ArrayList<Person> personSearchList;
+	private ArrayList<Book>   bookSearchList;
+	private ArrayList<Rent>   oldRents;
 	private Person customer;
+	private LocalDate today;
 	
 	
 	@FXML
@@ -45,8 +47,10 @@ public class RentController {
 		store.getItems().addAll(SQL.getStores());
 		store.getSelectionModel().select(0);	// TODO: GET BD current Staff Store
 		
-		rentalStartCal.setValue(LocalDate.now());
-		rentalEndCal  .setValue(LocalDate.now().plusDays(10));
+		today = LocalDate.now();
+		
+		rentalStartCal.setValue(today);
+		rentalExpCal  .setValue(today.plusDays(28));
 		
 	}
 	
@@ -74,12 +78,23 @@ public class RentController {
 		int listIndex = personListView.getSelectionModel().getSelectedIndex();
 		
 		if (listIndex >= 0) {
+			
+			rentCurrentListView.getItems().clear();
+			rentPrice.setText(null);
+			
 			this.customer = personSearchList.get(listIndex);
 			customerName.setText(customer.getLastName() + " " + customer.getFirstName());
 			
+			loadOldRents();
 		}
 	}
 	
+	
+	@FXML
+	private void setExpCal() {
+		rentalExpCal.setValue(rentalStartCal.getValue().plusDays(28));
+		loadBookSearchData();
+	}
 	
 	
 	/** BOOK **/ 
@@ -92,40 +107,104 @@ public class RentController {
 		if (!bookSearch.getText().isEmpty()) {
 			int storeID = store.getSelectionModel().getSelectedIndex() + 1;
 
-			ArrayList<Inventory> tempAll  = SQL.loadBookSearchData("BOOK " + bookSearch.getText(), storeID);
+			ArrayList<Book> tempAll  = SQL.loadBookSearchData("BOOK " + bookSearch.getText(), storeID);
 			
-			ArrayList<Inventory> tempRent = SQL.loadBookRentData(storeID, formatDateOfCal(rentalStartCal.getValue()), 
-																		  formatDateOfCal(rentalEndCal  .getValue()));
+			ArrayList<Book> tempRent = SQL.loadBookRentData(storeID, formatDateOfCal(rentalStartCal.getValue()), 
+																		  formatDateOfCal(rentalExpCal  .getValue()));
 			
 			
-			for (Inventory t1 : tempAll) {
-				for (Inventory t2 : tempRent) {
+			for (Book t1 : tempAll) {
+				for (Book t2 : tempRent) {
 					if (t1.getbID() == t2.getbID()) {
 						t1.setAnz(t1.getAnz() - t2.getAnz());
 					}
 				}
 			}
-
 			
-			for (Inventory t1 : tempAll) {
+			for (Book t1 : tempAll) {
 				if (t1.getAnz() > 0) {
 					bookSearchList.add(t1);
 				}
 			}
 			
-			for (Inventory b : bookSearchList) {
+			for (Book b : bookSearchList) {
 				bookListView.getItems().add(new Label(b.toLabel()));
 			}
-			
 			
 		} 
 
 	}
 	
 	
-	private String formatDateOfCal(LocalDate date) {
-
-		return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	private void loadOldRents() {
+		
+		rentOfPersonListView.getItems().clear();
+		rentOfPersonListView.getItems().add(setHeaderOldRents());
+		
+		oldRents = SQL.loadOldRents(customer.getID());
+		
+		
+		for (Rent r : oldRents) {
+			
+			r.setBookList(SQL.loadBooksOfRent(r.getRental_id()));	// LOAD BOOKS OF RENT
+			r.calcPriceOfRent();
+			
+			rentOfPersonListView.getItems().add(new Label(r.toLabel()));
+			
+		}
+		
+		rentOfPersonListView.getItems().add(new Label("NEW RENT.."));
+		
+	}
+	
+	
+	private Label setHeaderOldRents() {
+		Label header = new Label(String.format("%-15s %-16s %-10s %-20s %s",
+				"Start Rent", "End Rent", "BOOKS", "STORE", "PRICE"));
+		
+		header.setStyle("-fx-font-weight:bold");
+		
+		return header;
+	}
+	
+	private Label setHeaderCurrentRentBooks() {
+		Label header = new Label(String.format("%-65s %-10s", "BOOK TITLE",
+																"PRICE / DAY"));
+		
+		header.setStyle("-fx-font-weight:bold");
+		
+		return header;
+	}
+	
+	@FXML
+	private void loadBooksOfRent() {
+		
+		int rent = rentOfPersonListView.getSelectionModel().getSelectedIndex();
+		int size = rentOfPersonListView.getItems().size() - 1;
+		
+		
+		if (rent == size) {
+			// TODO: CREATE NEW LIST & ADD BOOKS
+			
+			rentCurrentListView.getItems().clear();
+		}
+		else if (rent > 0) {
+			// TODO: SHOW BOOKS OF RENT & SET Price.
+			Rent oldRen = oldRents.get(rent - 1);
+			
+			rentCurrentListView.getItems().clear();
+			
+			rentCurrentListView.getItems().add(setHeaderCurrentRentBooks());
+			
+			
+			for(Book b : oldRen.getBookList()) {
+				rentCurrentListView.getItems().add(new Label(b.toLabel2()));
+			}
+			
+			
+			rentPrice.setText(String.format("%-6.2f CHF.-", oldRen.getRentPrice()));
+		}
+		
 	}
 	
 	
@@ -135,14 +214,16 @@ public class RentController {
 	
 	
 	
-	
 
 	
 	
 	
 	
 	
-	
+	private String formatDateOfCal(LocalDate date) {
+
+		return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	}
 	
 	
 }

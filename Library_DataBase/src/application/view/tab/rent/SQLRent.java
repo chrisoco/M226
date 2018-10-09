@@ -89,10 +89,9 @@ public class SQLRent {
 	}
 	
 	
-	
-	public ArrayList<Inventory> loadBookSearchData(String userSearch, int store) {
+	public ArrayList<Book> loadBookSearchData(String userSearch, int store) {
 		
-		ArrayList<Inventory> searchResult = new ArrayList<>();
+		ArrayList<Book> searchResult = new ArrayList<>();
 		
 		String query = "SELECT " 
 						+ "COUNT(b.book_id) AS anz, b.book_id, b.title "
@@ -110,7 +109,7 @@ public class SQLRent {
 			rs = st.executeQuery(query);
 		
 			while (rs.next()) {
-				searchResult.add(new Inventory(rs.getInt("book_id"), rs.getInt("anz"), rs.getString("title")));
+				searchResult.add(new Book(rs.getInt("book_id"), rs.getInt("anz"), rs.getString("title")));
 			}
 		
 		} catch (SQLException e) {}
@@ -120,9 +119,9 @@ public class SQLRent {
 	}
 	
 	
-	public ArrayList<Inventory> loadBookRentData(int store, String startDate, String endDate) {
+	public ArrayList<Book> loadBookRentData(int store, String startDate, String endDate) {
 		
-		ArrayList<Inventory> searchResult = new ArrayList<>();
+		ArrayList<Book> searchResult = new ArrayList<>();
 		
 		String query = "SELECT "
 						+ "COUNT(i.tbl_book_fk) AS anz, i.tbl_book_fk AS book_id "
@@ -135,33 +134,113 @@ public class SQLRent {
 						+ "ON l.tbl_inventory_fk = i.inventory_id "
 						
 						+ "WHERE i.tbl_store_fk = '" + store + "' AND ( "
-							+ "(endRental = null) OR "
-							+ "('2018-10-20' >= startRental AND '2018-10-20' <= endRental) OR "
-							+ "('2018-10-08' <= endRental AND '2018-10-08' >= startRental) OR "
-							+ "('2018-10-08' <= startRental AND '2018-10-20' >= endRental) "
-						/*
-						 *  TODO CONTINUE HERE 
-						 *  
-						 *  -- END   = 2018-10-20
-						 *  -- START = 2018-10-08
-						 *  
-						 */
+							+ "(r.endRental = null) OR "
+							+ "('" + endDate   + "' >= r.startRental AND '" + endDate   + "' <= r.endRental  ) OR "
+							+ "('" + startDate + "' <= r.endRental   AND '" + startDate + "' >= r.startRental) OR "
+							+ "('" + startDate + "' <= r.startRental AND '" + endDate   + "' >= r.endRental  ) "
+
 						+ ") GROUP BY book_id;";
 		
 		try {
 			rs = st.executeQuery(query);
 		
 			while (rs.next()) {
-				searchResult.add(new Inventory(rs.getInt("book_id"), rs.getInt("anz")));
+				searchResult.add(new Book(rs.getInt("book_id"), rs.getInt("anz")));
 			}
 		
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
+		} catch (SQLException e) {}
 		
 		
 		return searchResult;
 	}
+	
+	
+	public ArrayList<Rent> loadOldRents(int customerID){
+		
+		ArrayList<Rent> searchResult = new ArrayList<>();
+		
+		String query = "SELECT "
+						+ "COUNT(r.rental_id) AS anz, r.rental_id, r.startRental, r.endRental, r.expires, s.storeName "
+						+ "FROM tbl_listofrentalbooks AS l "
+						
+						+ "LEFT JOIN tbl_inventory AS i "
+						+ "ON l.tbl_inventory_fk = i.inventory_id "
+						
+						+ "LEFT JOIN tbl_rental AS r "
+						+ "ON l.tbl_rental_fk = r.rental_id "
+						
+						+ "LEFT JOIN tbl_store AS s "
+						+ "ON i.tbl_store_fk = s.store_id "
+						
+						+ "WHERE r.tbl_customer_fk = '" + customerID + "' "
+						
+						+ "GROUP BY r.rental_id "
+						+ "ORDER BY r.startRental;";
+		
+		
+		
+		
+		
+		try {
+			rs = st.executeQuery(query);
+		
+			while (rs.next()) {
+				searchResult.add(new Rent(rs.getInt("rental_id"), rs.getInt("anz"), rs.getString("startRental"),
+									   rs.getString("endRental"), rs.getString("expires"), rs.getString("storeName")));
+			}
+		
+		} catch (SQLException e) {}
+		
+		
+		
+		
+		
+		return searchResult;
+	}
+	
+	
+	public ArrayList<Book> loadBooksOfRent(int rentID){
+		
+		ArrayList<Book> result = new ArrayList<>();
+		
+		String query = "SELECT "
+						+ "i.inventory_id, b.book_id, b.title, b.price_day "
+						+ "FROM tbl_listOfRentalBooks AS l "
+						
+						+ "LEFT JOIN tbl_inventory AS i "
+						+ "ON l.tbl_inventory_fk = i.inventory_id "
+						
+						+ "LEFT JOIN tbl_book AS b "
+						+ "ON i.tbl_book_fk = b.book_id "
+						
+						+ "WHERE l.tbl_rental_fk = '" + rentID + "';";
+		
+		
+		
+		try {
+			rs = st.executeQuery(query);
+		
+			while (rs.next()) {
+				result.add(new Book(rs.getInt("inventory_id"), rs.getInt("book_id"),
+									rs.getString("title"),     rs.getString("price_day")));
+			}
+		
+		} catch (SQLException e) {}
+		
+		
+		
+		
+		
+		
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
