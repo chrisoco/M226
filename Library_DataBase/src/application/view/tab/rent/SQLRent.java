@@ -177,10 +177,6 @@ public class SQLRent {
 						+ "GROUP BY r.rental_id "
 						+ "ORDER BY r.startRental;";
 		
-		
-		
-		
-		
 		try {
 			rs = st.executeQuery(query);
 		
@@ -190,10 +186,6 @@ public class SQLRent {
 			}
 		
 		} catch (SQLException e) {}
-		
-		
-		
-		
 		
 		return searchResult;
 	}
@@ -226,12 +218,6 @@ public class SQLRent {
 			}
 		
 		} catch (SQLException e) {}
-		
-		
-		
-		
-		
-		
 		
 		return result;
 	}

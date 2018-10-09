@@ -78,7 +78,7 @@
                               <Insets left="40.0" right="40.0" />
                            </GridPane.margin>
                         </JFXDatePicker>
-                        <JFXDatePicker fx:id="rentalExpCal" maxWidth="1.7976931348623157E308" onAction="#loadBookSearchData" promptText="Rental Expires Date" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <JFXDatePicker fx:id="rentalExpCal" editable="false" maxWidth="1.7976931348623157E308" onAction="#loadBookSearchData" promptText="Rental Expires Date" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>

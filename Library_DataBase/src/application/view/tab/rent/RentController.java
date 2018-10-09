@@ -82,20 +82,18 @@ public class RentController {
 			rentCurrentListView.getItems().clear();
 			rentPrice.setText(null);
 			
-			this.customer = personSearchList.get(listIndex);
+			customer = personSearchList.get(listIndex);
 			customerName.setText(customer.getLastName() + " " + customer.getFirstName());
 			
 			loadOldRents();
 		}
 	}
 	
-	
 	@FXML
 	private void setExpCal() {
 		rentalExpCal.setValue(rentalStartCal.getValue().plusDays(28));
 		loadBookSearchData();
-	}
-	
+	}	
 	
 	/** BOOK **/ 
 	@FXML
@@ -135,11 +133,10 @@ public class RentController {
 
 	}
 	
-	
 	private void loadOldRents() {
 		
 		rentOfPersonListView.getItems().clear();
-		rentOfPersonListView.getItems().add(setHeaderOldRents());
+		setHeaderOldRents();
 		
 		oldRents = SQL.loadOldRents(customer.getID());
 		
@@ -158,22 +155,22 @@ public class RentController {
 	}
 	
 	
-	private Label setHeaderOldRents() {
+	private void setHeaderOldRents() {
 		Label header = new Label(String.format("%-15s %-16s %-10s %-20s %s",
 				"Start Rent", "End Rent", "BOOKS", "STORE", "PRICE"));
 		
 		header.setStyle("-fx-font-weight:bold");
 		
-		return header;
+		rentOfPersonListView.getItems().add(header);
 	}
 	
-	private Label setHeaderCurrentRentBooks() {
+	private void setHeaderCurrentRentBooks() {
 		Label header = new Label(String.format("%-65s %-10s", "BOOK TITLE",
 																"PRICE / DAY"));
 		
 		header.setStyle("-fx-font-weight:bold");
 		
-		return header;
+		rentCurrentListView.getItems().add(header);
 	}
 	
 	@FXML
@@ -189,18 +186,15 @@ public class RentController {
 			rentCurrentListView.getItems().clear();
 		}
 		else if (rent > 0) {
-			// TODO: SHOW BOOKS OF RENT & SET Price.
+
 			Rent oldRen = oldRents.get(rent - 1);
 			
 			rentCurrentListView.getItems().clear();
-			
-			rentCurrentListView.getItems().add(setHeaderCurrentRentBooks());
-			
+			setHeaderCurrentRentBooks();
 			
 			for(Book b : oldRen.getBookList()) {
 				rentCurrentListView.getItems().add(new Label(b.toLabel2()));
 			}
-			
 			
 			rentPrice.setText(String.format("%-6.2f CHF.-", oldRen.getRentPrice()));
 		}
