@@ -211,10 +211,16 @@ public class PersonController {
 	@FXML
 	private void updateDB() {
 		
+		int index = personListView.getSelectionModel().getSelectedIndex();
+		
 		if (advInputCheck()) {
-			if (isNewPerson.isSelected() || 
-			 personListView.getSelectionModel().getSelectedIndex() == -1) addNewPersonToDB();
-			else                          updatePersonInDB();
+			if (isNewPerson.isSelected()) { addNewPersonToDB();}
+
+			else if (index >= 0) {updatePersonInDB();}
+			
+			else {loadDialog("ERROR 403..", "You have not selected a Person in the Search List...\nPLEASE DO SO...");}
+			
+			
 		}
 		
 	}
@@ -231,8 +237,8 @@ public class PersonController {
 		
 		boolean customer = false, staff = false;
 		
-		int addressID = getAddressID(country.getText(),    plz.getText(), 
-										 city.getText(), street.getText());
+		int addressID = getAddressID(country.getText(),     plz.getText(), 
+										city.getText(),  street.getText());
 		
 		// CREATE NEW PERSON
 		Person p = new Person(firstName.getText(), lastName.getText(), 
