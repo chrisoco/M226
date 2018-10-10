@@ -223,6 +223,40 @@ public class SQLRent {
 	}
 	
 	
+	public void deleteRent(int rentID) {
+		
+		String delBooks = "DELETE FROM tbl_listofrentalbooks "
+							+ "WHERE tbl_rental_fk = '" + rentID + "';";
+		
+		
+		String delRent  = "DELETE FROM tbl_rental "
+							+ "WHERE rental_id = '" + rentID + "';";
+		
+		try {
+			st.executeUpdate(delBooks);
+			st.executeUpdate(delRent);
+		
+		} catch (SQLException e) {}
+		
+	}
+	
+	
+	public void deleteBookFromRent(int rentID, int invID) {
+		
+		String removeBook = "DELETE FROM tbl_listofrentalbooks "
+							+ "WHERE  tbl_rental_fk = '" + rentID + "' "
+							+ "AND tbl_inventory_fk = '" + invID  + "';";
+		
+		
+		try {
+			st.executeUpdate(removeBook);
+		
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		
+	}
+	
 	
 	
 	
