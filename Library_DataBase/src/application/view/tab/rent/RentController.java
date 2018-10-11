@@ -416,9 +416,12 @@ public class RentController {
 		
 		newBook = SQL.getInvIDOfBook(newBook, currRent.getStartRentalDate(), currRent.getExpiresDate(), currRent.getStoreID());
 		
+		
 		//TODO: CONTINUE HERE
+		SQL.bookToRent(newBook.getInvID(), currRent.getRental_id());
 
 		currRent.getBookList().add(newBook);
+		currRent.calcPriceOfRent();
 		
 		loadBooksOfRent(index);
 		

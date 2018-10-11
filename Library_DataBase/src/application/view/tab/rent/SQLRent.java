@@ -294,24 +294,98 @@ public class SQLRent {
 			
 			if (rs.next()) newRent.setRental_id(rs.getInt("ID"));
 		
-		} catch (SQLException e) {}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
 		
 		return newRent;
 	}
 	
 	
-	public Book getInvIDOfBook(Book newBook, String startDate, String expDate, int storeID) {
+	public Book getInvIDOfBook(Book newBook, String startDate, String endDate, int storeID) {
 		
-		String query = "";
+		ArrayList<Integer> allInvIDs  = new ArrayList<>();
+		ArrayList<Integer> notValidID = new ArrayList<>();
+		
+		String fillAll = "SELECT "
+						+ "inventory_id "
+						+ "FROM tbl_inventory "
+						+ "WHERE tbl_book_fk = '" + newBook.getbID() + "' "
+						+ "AND  tbl_store_fk = '" + storeID + "';";
 		
 		// TODO: CONTINUE HERE
+		String notValid = "SELECT  "
+							+ "i.inventory_id AS ID "
+							+ "FROM tbl_listOfRentalBooks AS l "
+							
+							+ "LEFT JOIN tbl_rental AS r "
+							+ "ON l.tbl_rental_fk = r.rental_id "
+							
+							+ "LEFT JOIN tbl_inventory AS i "
+							+ "ON l.tbl_inventory_fk = i.inventory_id "
+							
+							+ "WHERE i.tbl_store_fk = '3' AND i.tbl_book_fk = '3' AND ( "
+								+ "(r.endRental = null) OR "
+								+ "('" + endDate   + "' >= r.startRental AND '" + endDate   + "' <= r.endRental  ) OR "
+								+ "('" + startDate + "' <= r.endRental   AND '" + startDate + "' >= r.startRental) OR "
+								+ "('" + startDate + "' <= r.startRental AND '" + endDate   + "' >= r.endRental  ));";
+		
+		
+//		String getPrice = "SELECT " TODO: CONTINUE HERE
+		
+		try {
+			rs = st.executeQuery(fillAll);
+			
+			while (rs.next()) {
+				allInvIDs.add(rs.getInt("inventory_id"));
+			}
+			
+			rs = st.executeQuery(notValid);
+			
+			while (rs.next()) {
+				notValidID.add(rs.getInt("ID"));
+			}
+			
+			
+			for (int ALLID : allInvIDs) {
+				
+				if (!notValidID.contains(ALLID)) {
+					newBook.setInvID(ALLID);
+					break;
+				}
+				
+			}
+			
+		
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		
+		
+		
 		
 		
 		return newBook;
 	}
 	
 	
-	
+	public void bookToRent(int inventoryID, int rentalID) {
+		
+		String query  = "INSERT "
+						+ "INTO tbl_listofrentalbooks "
+							+ "(tbl_inventory_fk, tbl_rental_fk) "
+						+ "VALUES "
+							+ "('" + inventoryID + "', '" + rentalID + "');";
+
+		try {
+			
+			st.executeUpdate(query);
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		
+	}
 	
 	
 	
