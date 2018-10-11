@@ -25,6 +25,7 @@ public class SQLRent {
 	}
 	
 	
+	
 	public ArrayList<String> getStores(){
 		
 		ArrayList<String> result = new ArrayList<>();
@@ -53,6 +54,25 @@ public class SQLRent {
 		
 		return result;
 		
+	}
+	
+	
+	public int getStoreIDFromStaff(int staffID) {
+		
+		String query = "SELECT "
+						+ "tbl_store_fk AS storeID "
+						+ "FROM tbl_staff "
+						+ "WHERE tbl_person_fk = '" + staffID + "';";
+		
+		try {
+			rs = st.executeQuery(query);
+			
+			if (rs.next()) return rs.getInt("storeID");
+			
+		} catch (SQLException e) {}
+		
+		
+		return 0;
 	}
 	
 	
@@ -160,7 +180,7 @@ public class SQLRent {
 		ArrayList<Rent> searchResult = new ArrayList<>();
 		
 		String query = "SELECT "
-						+ "COUNT(r.rental_id) AS anz, r.rental_id, r.startRental, r.endRental, r.expires, s.storeName "
+						+ "COUNT(r.rental_id) AS anz, r.rental_id, r.startRental, r.endRental, r.expires, r.tbl_store_fk, s.storeName "
 						+ "FROM tbl_listofrentalbooks AS l "
 						
 						+ "LEFT JOIN tbl_inventory AS i "
@@ -170,7 +190,7 @@ public class SQLRent {
 						+ "ON l.tbl_rental_fk = r.rental_id "
 						
 						+ "LEFT JOIN tbl_store AS s "
-						+ "ON i.tbl_store_fk = s.store_id "
+						+ "ON r.tbl_store_fk = s.store_id "
 						
 						+ "WHERE r.tbl_customer_fk = '" + customerID + "' "
 						
@@ -182,7 +202,7 @@ public class SQLRent {
 		
 			while (rs.next()) {
 				searchResult.add(new Rent(rs.getInt("rental_id"), rs.getInt("anz"), rs.getString("startRental"),
-									   rs.getString("endRental"), rs.getString("expires"), rs.getString("storeName")));
+									   rs.getString("endRental"), rs.getString("expires"), rs.getInt("tbl_store_fk"), rs.getString("storeName")));
 			}
 		
 		} catch (SQLException e) {}
@@ -251,14 +271,44 @@ public class SQLRent {
 		try {
 			st.executeUpdate(removeBook);
 		
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
+		} catch (SQLException e) {}
 		
 	}
 	
 	
+	public Rent addRent(Rent newRent, int staffID, int customerID, int storeID) {
+		
+		String addRent = "INSERT "
+						+ "INTO tbl_rental "
+						+ "(startRental, expires, payed, tbl_staff_fk, tbl_customer_fk, tbl_store_fk) "
+						
+						+ "VALUES "
+						+ "('" + newRent.getStartRentalDate() + "', '" + newRent.getExpiresDate() 
+						+ "', '0', '" + staffID + "', '" + customerID + "', '" + storeID + "');";
+		
+		String getIndex = "SELECT LAST_INSERT_ID() AS ID;";
+		
+		try {
+			st.executeUpdate(addRent);
+			rs = st.executeQuery(getIndex);
+			
+			if (rs.next()) newRent.setRental_id(rs.getInt("ID"));
+		
+		} catch (SQLException e) {}
+		
+		return newRent;
+	}
 	
+	
+	public Book getInvIDOfBook(Book newBook, String startDate, String expDate, int storeID) {
+		
+		String query = "";
+		
+		// TODO: CONTINUE HERE
+		
+		
+		return newBook;
+	}
 	
 	
 	

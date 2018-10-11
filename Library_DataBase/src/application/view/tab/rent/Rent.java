@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Rent {
 
-	private int rental_id, anz;
+	private int rental_id, anz, storeID;
 	
 	private String startRentalDate, endRentalDate, expiresDate, storeName;
 
@@ -17,7 +17,7 @@ public class Rent {
 	
 	
 	public Rent(int rental_id, int anz, String startRentalDate, 
-				  String endRentalDate, String expiresDate, String storeName) {
+				  String endRentalDate, String expiresDate, int storeID, String storeName) {
 		
 		this.rental_id       = rental_id;
 		this.anz             = anz;
@@ -25,9 +25,24 @@ public class Rent {
 		this.endRentalDate   = endRentalDate;
 		this.expiresDate     = expiresDate;
 		this.storeName       = storeName;
-		
+		this.storeID         = storeID;
 		
 	}
+	
+	
+	public Rent(String startRentalDate, String expiresDate, int storeID) {
+		
+		this.startRentalDate = startRentalDate;
+		this.expiresDate     = expiresDate;
+		this.storeID         = storeID;
+
+		this.storeName       = "New Rent";
+		this.anz             = 0;
+		this.rentPrice       = 0.00;
+		
+		this.bookList = new ArrayList<>();
+	}
+	
 	
 	
 	
@@ -134,6 +149,16 @@ public class Rent {
 
 	public void setRentPrice(double rentPrice) {
 		this.rentPrice = rentPrice;
+	}
+
+
+	public int getStoreID() {
+		return storeID;
+	}
+
+
+	public void setStoreID(int storeID) {
+		this.storeID = storeID;
 	}
 
 

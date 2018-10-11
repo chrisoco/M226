@@ -3,7 +3,9 @@ package application.view.tab.rent;
 public class Book {
 
 	private int invID, bID, anz;
+	
 	private String bTitle, price_day;
+	
 	
 	
 	public Book(int bID, int anz, String bTitle) {
@@ -77,6 +79,7 @@ public class Book {
 	public void setPrice_day(String price_day) {
 		this.price_day = price_day;
 	}
+
 	
 	
 	
