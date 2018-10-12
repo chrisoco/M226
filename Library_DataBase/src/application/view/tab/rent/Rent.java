@@ -5,15 +5,17 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+import javafx.scene.control.Label;
+
 public class Rent {
 
 	private int rental_id, anz, storeID;
 	
+	private double rentPrice;
+	
 	private String startRentalDate, endRentalDate, expiresDate, storeName;
 
 	private ArrayList<Book> bookList;
-	
-	private double rentPrice;
 	
 	
 	public Rent(int rental_id, int anz, String startRentalDate, 
@@ -44,10 +46,8 @@ public class Rent {
 	}
 	
 	
-	
-	
-	public String toLabel() {
-		return String.format("%-15s %-15s %5d %-5s %-10s %16.2f CHF.-", startRentalDate, endRentalDate, anz, " ", storeName, rentPrice);
+	public Label toLabel() {
+		return new Label(String.format("%-15s %-15s %5d %-5s %-10s %16.2f CHF.-", startRentalDate, endRentalDate, anz, " ", storeName, rentPrice));
 	}
 	
 	
@@ -75,20 +75,7 @@ public class Rent {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	public int getRental_id() {
 		return rental_id;
@@ -126,50 +113,23 @@ public class Rent {
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
 	}
-
-
-
 	public ArrayList<Book> getBookList() {
 		return bookList;
 	}
-
-
-
 	public void setBookList(ArrayList<Book> bookList) {
 		this.bookList = bookList;
 	}
-
-
-
 	public double getRentPrice() {
 		return rentPrice;
 	}
-
-
-
 	public void setRentPrice(double rentPrice) {
 		this.rentPrice = rentPrice;
 	}
-
-
 	public int getStoreID() {
 		return storeID;
 	}
-
-
 	public void setStoreID(int storeID) {
 		this.storeID = storeID;
 	}
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

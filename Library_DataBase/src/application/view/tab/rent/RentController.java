@@ -24,19 +24,19 @@ public class RentController {
 	private JFXTextField personSearch, bookSearch, customerName, rentPrice;
 	
 	@FXML
-	private JFXListView<Label> personListView, bookListView, rentOfPersonListView, rentCurrentListView;
+	private JFXListView<Label> personListView, bookSearchListView, rentListView, rentBookListView;
 	
 	@FXML
 	private JFXDatePicker rentalStartCal, rentalExpCal, rentalEndCal;
 	
 	@FXML
-	private JFXButton submit, addBook;
+	private JFXButton submit;
 	
 	@FXML
 	private JFXComboBox<String> store;
 	
 	@FXML
-	private JFXPopup popUpRentOfPerson, popUpCurrentRent, popUpBookList;
+	private JFXPopup popUpRentList, popUpRentBookList, popUpBookSearchList;
 	
 	
 	private SQLRent SQL = new SQLRent();
@@ -50,97 +50,63 @@ public class RentController {
 	private LocalDate today;
 	
 	private int storeID;
-	private int staffID = 200;
+	private int staffID;
+	
+	
+	
+	
 	
 	@FXML
 	public void initialize() {
-		storeID = 3; // SQL.getStoreIDFromStaff(Main.db.getStaff_ID()) - 1; ENABLE THIS IF Login is enabled.
+		
+//		ENABLE THIS IF Login is enabled.
+//		staffID = Main.db.getStaff_ID();
+//		storeID = SQL.getStoreIDFromStaff(staffID);
+		
+		staffID = 200;
+		storeID = 3;
 		
 		store.getItems().addAll(SQL.getStores());
-		store.getSelectionModel().select(storeID - 1);	// TODO: GET BD current Staff Store
+		store.getSelectionModel().select(storeID - 1);
 		
+		today = LocalDate.now();
 		setDefaultCalDates();
 		
-		initPopUpRentOfPerson();
-		initPopUpBookList();
-		initPopUpCurrentRent();
+		initAllPopUps();
+	}
+	
+	private void setDefaultCalDates() {
+		
+		rentalStartCal.setValue(today);
+		rentalExpCal  .setValue(today.plusDays(28));
+		rentalEndCal  .setValue(null);
+	}
+	
+	private void initAllPopUps() {
+		initPopUpRentList();
+		initPopUpBookSearchList();
+		initPopUpRentBookList();
 	}
 	
 	
-	@FXML
-	private void rentOfPersonListViewControll(MouseEvent event) {
-		
-		int index = rentOfPersonListView.getSelectionModel().getSelectedIndex();
-		
-		if (index > 0) {
-		
-			if(event.getButton() == MouseButton.SECONDARY) {
-				popUpRentOfPerson.show(rentOfPersonListView, 
-										JFXPopup.PopupVPosition.TOP,  JFXPopup.PopupHPosition.LEFT, 
-																		event.getX(), event.getY());
-			}
-				
-			else {
-				
-				loadBooksOfRent(index);
-			}
-		}
-		
-		if (index == 0) {
-			rentCurrentListView.getItems().clear();
-		}
-		
-	}
 	
-	@FXML
-	private void bookListViewControll(MouseEvent event) {
-		
-		int index = bookListView.getSelectionModel().getSelectedIndex();
-		
-		if (index >= 0) {
-		
-			if(event.getButton() == MouseButton.SECONDARY) popUpBookList.show(bookListView, 
-										JFXPopup.PopupVPosition.TOP,  JFXPopup.PopupHPosition.LEFT, 
-																		event.getX(), event.getY());
-		}
-		
-	}
-	
-	@FXML
-	private void rentCurrentListViewControll(MouseEvent event) {
-		
-		int index = rentCurrentListView.getSelectionModel().getSelectedIndex();
-		
-		if (index > 0) {
-			
-			if (event.getButton() == MouseButton.SECONDARY) {
-				popUpCurrentRent.show(rentCurrentListView, 
-										JFXPopup.PopupVPosition.TOP,  JFXPopup.PopupHPosition.LEFT, 
-																		event.getX(), event.getY());
-			}
-			
-		}
-		
-	}
-	
-	
-	private void initPopUpRentOfPerson() {
+	private void initPopUpRentList() {
 		
 		JFXButton show = new JFXButton("SHOW");
 		JFXButton del  = new JFXButton("DELETE");
 		JFXButton can  = new JFXButton("CANCLE");
 		
 		show.setOnAction(e -> {
-			popUpRentOfPerson.hide(); 
-			loadBooksOfRent(rentOfPersonListView.getSelectionModel().getSelectedIndex());
+			popUpRentList.hide(); 
+			loadBookListOfSelectedRent(getSelectedRentIndex());
 		});
 		
 		del .setOnAction(e -> {
-			popUpRentOfPerson.hide();
+			popUpRentList.hide();
 			delRentOfPerson();
 		});
 		
-		can .setOnAction(e -> popUpRentOfPerson.hide());
+		can .setOnAction(e -> popUpRentList.hide());
 		
 		show.setPrefSize(100, 40);
 		del .setPrefSize(100, 40);
@@ -151,22 +117,22 @@ public class RentController {
 		vBox.setSpacing(5);
 		vBox.setStyle("-fx-background-color: lightgray;");
 		
-		popUpRentOfPerson = new JFXPopup(vBox);
+		popUpRentList = new JFXPopup(vBox);
 		
 	}
 	
-	private void initPopUpBookList() {
+	private void initPopUpBookSearchList() {
 		
 		JFXButton add = new JFXButton("ADD");
 		JFXButton can = new JFXButton("CANCLE");
 		
 		add.setOnAction(e -> {
-			popUpBookList.hide();
+			popUpBookSearchList.hide();
 			addBookToRent();
 			
-		});	// TODO: CREATE ADD METHOD.
+		});
 		
-		can.setOnAction(e -> popUpBookList.hide());
+		can.setOnAction(e -> popUpBookSearchList.hide());
 		
 		add.setPrefSize(100, 40);
 		can.setPrefSize(100, 40);
@@ -176,20 +142,21 @@ public class RentController {
 		vBox.setSpacing(5);
 		vBox.setStyle("-fx-background-color: lightgray;");
 		
-		popUpBookList = new JFXPopup(vBox);
+		popUpBookSearchList = new JFXPopup(vBox);
 	}
 	
-	private void initPopUpCurrentRent() {
+
+	private void initPopUpRentBookList() {
 		
 		JFXButton del = new JFXButton("DELETE");
 		JFXButton can = new JFXButton("CANCLE");
 		
 		del.setOnAction(e -> {
-			popUpCurrentRent.hide();
+			popUpRentBookList.hide();
 			delRentBook();
 		});
 		
-		can.setOnAction(e -> popUpCurrentRent.hide());
+		can.setOnAction(e -> popUpRentBookList.hide());
 		
 		del.setPrefSize(100, 40);
 		can.setPrefSize(100, 40);
@@ -199,62 +166,200 @@ public class RentController {
 		vBox.setSpacing(5);
 		vBox.setStyle("-fx-background-color: lightgray;");
 		
-		popUpCurrentRent = new JFXPopup(vBox);
+		popUpRentBookList = new JFXPopup(vBox);
 	}
+	
+	
+	
+	
+	
+	@FXML
+	private void rentOfPersonListViewControll(MouseEvent event) {
+		
+		int index = getSelectedRentIndex();
+		
+		if (index > 0) {
+		
+			if(event.getButton() == MouseButton.SECONDARY) 
+					popUpRentList.show(rentListView, JFXPopup.PopupVPosition.TOP,  JFXPopup.PopupHPosition.LEFT, event.getX(), event.getY());
+			
+			else	loadBookListOfSelectedRent(index);
+			
+		}
+		
+		if (index == 0) clearRentBookList();
+		
+	}
+	
+	
+	@FXML
+	private void rentCurrentListViewControll(MouseEvent event) {
+		
+		int index = getSelectedBookIndex();
+		
+		if (index > 0) {
+			
+			if (event.getButton() == MouseButton.SECONDARY) 
+					popUpRentBookList.show(rentBookListView, JFXPopup.PopupVPosition.TOP,  JFXPopup.PopupHPosition.LEFT, event.getX(), event.getY());
+			
+		}
+		
+	}
+	
+	
+	@FXML
+	private void bookListViewControll(MouseEvent event) {
+		
+		int index = getSelectedBookSearchIndex();
+		
+		if (index >= 0) {
+		
+			if(event.getButton() == MouseButton.SECONDARY) 
+					popUpBookSearchList.show(bookSearchListView, JFXPopup.PopupVPosition.TOP,  JFXPopup.PopupHPosition.LEFT, event.getX(), event.getY());
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	@FXML
+	private void setExpCal() {
+		rentalExpCal.setValue(rentalStartCal.getValue().plusDays(28));
+		loadBookSearchData();
+	}
+	
+	
+	
+	private int getSelectedRentIndex() {
+		return rentListView.getSelectionModel().getSelectedIndex();
+	}
+	
+	private int getSelectedBookIndex() {
+		return rentBookListView.getSelectionModel().getSelectedIndex();
+	}
+	
+	private int getSelectedBookSearchIndex() {
+		return bookSearchListView.getSelectionModel().getSelectedIndex();
+	}
+	
+	private int getSelectedPersonIndex() {
+		return personListView.getSelectionModel().getSelectedIndex();
+	}
+	
+	private int getSelectedStoreIndex() {
+		return store.getSelectionModel().getSelectedIndex() + 1;
+	}
+	
+	
+	
+	
+	private String formatDateOfCal(LocalDate date) {
+
+		return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	}
+	
+	private LocalDate getDateOfString(String date) {
+		
+		if (date == null) return null;
+		
+		return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+	}
+	
+	
+	
+	
+	private void clearRentBookList() {
+		rentBookListView.getItems().clear();
+	}
+	
+	private void clearPersonList() {
+		personListView.getItems().clear();
+	}
+	
+	private void clearRentList() {
+		rentListView.getItems().clear();
+	}
+	
+	private void clearBookSearchList() {
+		bookSearchListView.getItems().clear();
+	}
+	
+	
+	
+	
+	private void createHeaderRentList() {
+		Label header = new Label(String.format("%-15s %-16s %-10s %-20s %s", "Start Rent", "End Rent", "BOOKS", "STORE", "PRICE"));
+		
+		header.setStyle("-fx-font-weight:bold");
+		
+		rentListView.getItems().add(header);
+	}
+	
+	private void createHeaderBookRentList() {
+		Label header = new Label(String.format("%-65s %-10s", "BOOK TITLE",	"PRICE / DAY"));
+		
+		header.setStyle("-fx-font-weight:bold");
+		
+		rentBookListView.getItems().add(header);
+	}
+	
+	
 	
 	
 	@FXML
 	private void loadPersonSearchData() {
 		
-		personListView.getItems().clear();
+		clearPersonList();
 		
 		if (!personSearch.getText().isEmpty()) {
 			
 			personSearchList = SQL.loadPersonSearchData(personSearch.getText());
 			
 			for (Person p : personSearchList) {
-				personListView.getItems().add(new Label(p.getNameLabel()));
+				personListView.getItems().add(p.getNameLabel());
 			}
 		} 
 		
 	}
 	
+	
 	@FXML
 	private void loadPersonToLabel() {
 		
-		int listIndex = personListView.getSelectionModel().getSelectedIndex();
+		int index = getSelectedPersonIndex();
 		
-		if (listIndex >= 0) {
+		if (index >= 0) {
 			
-			rentCurrentListView.getItems().clear();
+			clearRentBookList();
 			rentPrice.setText(null);
 			
-			customer = personSearchList.get(listIndex);
+			customer = personSearchList.get(index);
 			customerName.setText(customer.getLastName() + " " + customer.getFirstName());
 			
-			loadOldRents();
+			setDefaultCalDates();
+			loadRentsOfPerson();
 		}
 	}
 	
-	@FXML
-	private void setExpCal() {
-		rentalExpCal.setValue(rentalStartCal.getValue().plusDays(28));
-		loadBookSearchData();
-	}	
 	
 	@FXML
 	private void loadBookSearchData() {
 
 		bookSearchList = new ArrayList<>();
-		bookListView.getItems().clear();
+		
+		clearBookSearchList();
 
 		if (!bookSearch.getText().isEmpty()) {
-			int storeID = store.getSelectionModel().getSelectedIndex() + 1;
 
-			ArrayList<Book> tempAll  = SQL.loadBookSearchData("BOOK " + bookSearch.getText(), storeID);
+			ArrayList<Book> tempAll  = SQL.loadBookSearchData("BOOK " + bookSearch.getText(), getSelectedStoreIndex());
 			
-			ArrayList<Book> tempRent = SQL.loadBookRentData(storeID, formatDateOfCal(rentalStartCal.getValue()), 
-																	 formatDateOfCal(rentalExpCal  .getValue()));
+			ArrayList<Book> tempRent = SQL.loadBookRentData  (getSelectedStoreIndex(), 
+																formatDateOfCal(rentalStartCal.getValue()), 
+																formatDateOfCal(rentalExpCal  .getValue()));
 			
 			for (Book t1 : tempAll) {
 				for (Book t2 : tempRent) {
@@ -271,80 +376,63 @@ public class RentController {
 			}
 			
 			for (Book b : bookSearchList) {
-				bookListView.getItems().add(new Label(b.toLabel()));
+				bookSearchListView.getItems().add(b.toLabel());
 			}
 			
 		} 
 
 	}
 	
-	private void loadOldRents() {
+	
+	private void loadRentsOfPerson() {
 		
-		rentOfPersonListView.getItems().clear();
-		setHeaderOldRents();
+		clearRentList();
+		createHeaderRentList();
 		
-		rentList = SQL.loadOldRents(customer.getID());
-		
+		rentList = SQL.loadRentsOfPerson(customer.getID());
 		
 		for (Rent r : rentList) {
 			
-			r.setBookList(SQL.loadBooksOfRent(r.getRental_id()));	// LOAD BOOKS OF RENT
+			r.setBookList(SQL.loadBooksOfRent(r.getRental_id()));
 			r.calcPriceOfRent();
 			
-			rentOfPersonListView.getItems().add(new Label(r.toLabel()));
+			rentListView.getItems().add(r.toLabel());
 			
 		}
 		
-		rentOfPersonListView.getItems().add(new Label("NEW RENT.."));
+		rentListView.getItems().add(new Label("ADD NEW RENT +++.."));
 		
 	}
 	
-	private void setHeaderOldRents() {
-		Label header = new Label(String.format("%-15s %-16s %-10s %-20s %s",
-				"Start Rent", "End Rent", "BOOKS", "STORE", "PRICE"));
-		
-		header.setStyle("-fx-font-weight:bold");
-		
-		rentOfPersonListView.getItems().add(header);
-	}
 	
-	private void setHeaderCurrentRentBooks() {
-		Label header = new Label(String.format("%-65s %-10s", "BOOK TITLE",
-																"PRICE / DAY"));
+	private void loadBookListOfSelectedRent(int index) {
 		
-		header.setStyle("-fx-font-weight:bold");
+		int size = rentListView.getItems().size() - 1;
 		
-		rentCurrentListView.getItems().add(header);
-	}
-	
-	
-	private void loadBooksOfRent(int index) {
+		clearRentBookList();
 		
-		int size = rentOfPersonListView.getItems().size() - 1;
 		
 		if (index == size) {
 			setDefaultCalDates();
 			store.getSelectionModel().select(storeID - 1);
 			
-			rentCurrentListView.getItems().clear();
 			createNewRent();
-		}
-		else {
+			
+		} else {
 
 			Rent oldRent = rentList.get(index - 1);
 			
-			rentCurrentListView.getItems().clear();
-			setHeaderCurrentRentBooks();
+			createHeaderBookRentList();
 			
 			for(Book b : oldRent.getBookList()) {
-				rentCurrentListView.getItems().add(new Label(b.toLabel2()));
+				rentBookListView.getItems().add(new Label(b.toLabel2()));
 			}
 			
 			rentPrice.setText(String.format("%-6.2f CHF.-", oldRent.getRentPrice()));
 
 			rentalStartCal.setValue(getDateOfString(oldRent.getStartRentalDate()));
-			rentalExpCal  .setValue(getDateOfString(oldRent.getExpiresDate()));
-			rentalEndCal  .setValue(getDateOfString(oldRent.getEndRentalDate()));
+			rentalExpCal  .setValue(getDateOfString(oldRent.getExpiresDate    ()));
+			rentalEndCal  .setValue(getDateOfString(oldRent.getEndRentalDate  ()));
 			
 			store.getSelectionModel().select(oldRent.getStoreID() - 1);
 			
@@ -353,9 +441,11 @@ public class RentController {
 	}
 	
 	
+	
+	
 	private void delRentOfPerson() {
 		
-		int index = (rentOfPersonListView.getSelectionModel().getSelectedIndex()) - 1;
+		int index = getSelectedRentIndex() - 1;
 		
 		if (index == rentList.size()) return;
 	
@@ -366,89 +456,98 @@ public class RentController {
 		
 			SQL.deleteRent(rent.getRental_id());
 			
-			loadOldRents();
-			rentCurrentListView.getItems().clear();
+			loadRentsOfPerson();
+			clearRentBookList();
 			
-		} else {
-			rentList.remove(index);
-			rentOfPersonListView.getItems().remove(index + 1);
 		}
 		
 	}
 	
-	private void createNewRent() {
-
-		Rent newRent = SQL.addRent(new Rent(formatDateOfCal(today), formatDateOfCal(today.plusDays(28)), storeID), 
-										staffID, customer.getID(), store.getSelectionModel().getSelectedIndex() + 1);
-		
-		rentList.add(newRent);
-		rentOfPersonListView.getItems().add(rentList.size(), new Label(newRent.toLabel()));
-		rentOfPersonListView.getSelectionModel().select(rentList.size());
-		loadBooksOfRent(rentList.size());
-		
-	}
 	
 	private void delRentBook() {
 		
-		int indexBook = (rentCurrentListView .getSelectionModel().getSelectedIndex()) - 1;
-		int indexRent = (rentOfPersonListView.getSelectionModel().getSelectedIndex()) - 1;
+		int indexBook = getSelectedBookIndex();
+		int indexRent = getSelectedRentIndex();
 		
-		Rent r = rentList.get(indexRent);
+		Rent r = rentList.get(indexRent - 1);
 		
-		Book b = r.getBookList().get(indexBook);
+		Book b = r.getBookList().get(indexBook - 1);
 		
 		SQL.deleteBookFromRent(r.getRental_id(), b.getInvID());
 		
-		loadOldRents();
-		rentOfPersonListView.getSelectionModel().select(indexRent + 1);
-		loadBooksOfRent(indexRent + 1);
+		loadRentsOfPerson();
+		
+		rentListView.getSelectionModel().select(indexRent);
+		
+		loadBookListOfSelectedRent(indexRent);
 		
 	}
 	
+	
+	private void createNewRent() {
+
+		Rent newRent = SQL.addRent(new Rent(formatDateOfCal(today), formatDateOfCal(today.plusDays(28)), storeID), staffID, customer.getID(), getSelectedStoreIndex());
+		
+		rentList.add(newRent);
+		
+		int lastIndex = rentList.size();
+		
+		rentListView.getItems().add(lastIndex, newRent.toLabel());
+		
+		rentListView.getSelectionModel().select(lastIndex);
+		
+		loadBookListOfSelectedRent(lastIndex);
+		
+	}
+	
+	
 	private void addBookToRent() {
 		
-		int index = rentOfPersonListView.getSelectionModel().getSelectedIndex();
+		int index = getSelectedRentIndex();
+		
 		if (index < 0) return;
 		
 		Rent currRent = rentList.get(index - 1);
 		
-		Book newBook  = bookSearchList.get(bookListView.getSelectionModel().getSelectedIndex());
+		Book newBook  = bookSearchList.get(getSelectedBookSearchIndex());
 		
-		newBook = SQL.getInvIDOfBook(newBook, currRent.getStartRentalDate(), currRent.getExpiresDate(), currRent.getStoreID());
+		newBook = SQL.getFreeInventoryIDFROMBookID(newBook, currRent.getStartRentalDate(), currRent.getExpiresDate(), currRent.getStoreID());
 		
 		
-		//TODO: CONTINUE HERE
+		
 		SQL.bookToRent(newBook.getInvID(), currRent.getRental_id());
 
 		currRent.getBookList().add(newBook);
 		currRent.calcPriceOfRent();
 		
-		loadBooksOfRent(index);
+		loadBookListOfSelectedRent(index);
 		
-		//TODO Reload bookSearch.
+		loadBookSearchData();
 		
 	}
 
 	
-	
-	private void setDefaultCalDates() {
+	@FXML
+	private void updateRent() {
 		
-		today = LocalDate.now();
+		int index = getSelectedRentIndex();
 		
-		rentalStartCal.setValue(today);
-		rentalExpCal  .setValue(today.plusDays(28));
-		rentalEndCal  .setValue(null);
-	}
-	
-	
-	private String formatDateOfCal(LocalDate date) {
-
-		return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-	}
-	
-	private LocalDate getDateOfString(String date) {
-		if (date == null) return null;
-		return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		Rent currRent = rentList.get(index - 1);
+		
+		currRent.setStartRentalDate(formatDateOfCal(rentalStartCal.getValue()));
+		currRent.setExpiresDate    (formatDateOfCal(rentalExpCal  .getValue()));
+		currRent.setEndRentalDate  (formatDateOfCal(rentalEndCal  .getValue()));
+		
+		currRent.calcPriceOfRent();
+		
+		SQL.updateRent(currRent);
+		
+		loadRentsOfPerson();
+		
+		rentListView.getSelectionModel().select(index);
+		
+		loadBookListOfSelectedRent(index);
+		
 	}
 	
 	

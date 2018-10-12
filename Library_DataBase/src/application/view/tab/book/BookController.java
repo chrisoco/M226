@@ -1,6 +1,5 @@
 package application.view.tab.book;
 
-import application.view.tab.person.SQLPerson;
 import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

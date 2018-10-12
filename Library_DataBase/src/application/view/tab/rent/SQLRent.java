@@ -15,6 +15,9 @@ public class SQLRent {
 	private Statement  st;
 	private ResultSet  rs;
 	
+	
+	
+	
 	public SQLRent() {
 		try {
 			this.DBCon = Main.db.getDBCon();
@@ -23,6 +26,7 @@ public class SQLRent {
 		} catch (SQLException e) {}
 		
 	}
+	
 	
 	
 	
@@ -43,11 +47,11 @@ public class SQLRent {
 						+ "ORDER BY store_id ASC;";
 		
 		try {
+			
 			rs = st.executeQuery(query);
 			
 			while(rs.next()) {
-				result.add(String.format("%-10s %s", 
-						rs.getString("storeName"), rs.getString("cityName")));
+				result.add(String.format("%-10s %s", rs.getString("storeName"), rs.getString("cityName")));
 			}	
 		} 
 		catch (SQLException e) {}
@@ -65,6 +69,7 @@ public class SQLRent {
 						+ "WHERE tbl_person_fk = '" + staffID + "';";
 		
 		try {
+			
 			rs = st.executeQuery(query);
 			
 			if (rs.next()) return rs.getInt("storeID");
@@ -81,30 +86,23 @@ public class SQLRent {
 		ArrayList<Person> searchResult = new ArrayList<Person>();
 		
 		String query =    "SELECT "
-							+ "* "
-						+ "FROM "
-							+ "m153.tbl_person "
-						+ "WHERE "
-							+ "lastName LIKE '" + userSearch + "%'"
-						+ "ORDER BY "
-							+ "lastName, firstName;";
-		
-		int i = 0;
-		
+								+ "* "
+							+ "FROM "
+								+ "m153.tbl_person "
+							+ "WHERE "
+								+ "lastName LIKE '" + userSearch + "%'"
+							+ "ORDER BY "
+								+ "lastName, firstName;";
+
 		try {
 			rs = st.executeQuery(query);
 		
-			while (rs.next()) {
-				if(i > 15) break;
-				
+			while (rs.next()) {			
 				searchResult.add(new Person(rs.getInt("person_id"), rs.getString("firstName"), rs.getString("lastName")));
-				
-				i++;
 			}
 		
 		} catch (SQLException e) {}
-		
-		
+
 		return searchResult;
 	}
 	
@@ -154,7 +152,7 @@ public class SQLRent {
 						+ "ON l.tbl_inventory_fk = i.inventory_id "
 						
 						+ "WHERE i.tbl_store_fk = '" + store + "' AND ( "
-							+ "(r.endRental = null) OR "
+							+ "(r.endRental IS null) OR "
 							+ "('" + endDate   + "' >= r.startRental AND '" + endDate   + "' <= r.endRental  ) OR "
 							+ "('" + startDate + "' <= r.endRental   AND '" + startDate + "' >= r.startRental) OR "
 							+ "('" + startDate + "' <= r.startRental AND '" + endDate   + "' >= r.endRental  ) "
@@ -170,12 +168,11 @@ public class SQLRent {
 		
 		} catch (SQLException e) {}
 		
-		
 		return searchResult;
 	}
 	
 	
-	public ArrayList<Rent> loadOldRents(int customerID){
+	public ArrayList<Rent> loadRentsOfPerson(int customerID){
 		
 		ArrayList<Rent> searchResult = new ArrayList<>();
 		
@@ -201,8 +198,10 @@ public class SQLRent {
 			rs = st.executeQuery(query);
 		
 			while (rs.next()) {
-				searchResult.add(new Rent(rs.getInt("rental_id"), rs.getInt("anz"), rs.getString("startRental"),
-									   rs.getString("endRental"), rs.getString("expires"), rs.getInt("tbl_store_fk"), rs.getString("storeName")));
+				searchResult.add(
+						new Rent(rs.getInt("rental_id"), rs.getInt("anz"), rs.getString("startRental"),
+								 rs.getString("endRental"), rs.getString("expires"), rs.getInt("tbl_store_fk"), 
+								 rs.getString("storeName")));
 			}
 		
 		} catch (SQLException e) {}
@@ -225,7 +224,9 @@ public class SQLRent {
 						+ "LEFT JOIN tbl_book AS b "
 						+ "ON i.tbl_book_fk = b.book_id "
 						
-						+ "WHERE l.tbl_rental_fk = '" + rentID + "';";
+						+ "WHERE l.tbl_rental_fk = '" + rentID + "' "
+						
+						+ "ORDER BY b.title;";
 		
 		
 		
@@ -267,7 +268,6 @@ public class SQLRent {
 							+ "WHERE  tbl_rental_fk = '" + rentID + "' "
 							+ "AND tbl_inventory_fk = '" + invID  + "';";
 		
-		
 		try {
 			st.executeUpdate(removeBook);
 		
@@ -294,15 +294,13 @@ public class SQLRent {
 			
 			if (rs.next()) newRent.setRental_id(rs.getInt("ID"));
 		
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
+		} catch (SQLException e) {}
 		
 		return newRent;
 	}
 	
 	
-	public Book getInvIDOfBook(Book newBook, String startDate, String endDate, int storeID) {
+	public Book getFreeInventoryIDFROMBookID(Book newBook, String startDate, String endDate, int storeID) {
 		
 		ArrayList<Integer> allInvIDs  = new ArrayList<>();
 		ArrayList<Integer> notValidID = new ArrayList<>();
@@ -313,7 +311,6 @@ public class SQLRent {
 						+ "WHERE tbl_book_fk = '" + newBook.getbID() + "' "
 						+ "AND  tbl_store_fk = '" + storeID + "';";
 		
-		// TODO: CONTINUE HERE
 		String notValid = "SELECT  "
 							+ "i.inventory_id AS ID "
 							+ "FROM tbl_listOfRentalBooks AS l "
@@ -324,14 +321,17 @@ public class SQLRent {
 							+ "LEFT JOIN tbl_inventory AS i "
 							+ "ON l.tbl_inventory_fk = i.inventory_id "
 							
-							+ "WHERE i.tbl_store_fk = '3' AND i.tbl_book_fk = '3' AND ( "
-								+ "(r.endRental = null) OR "
+							+ "WHERE i.tbl_store_fk = '" + storeID + "' AND i.tbl_book_fk = '" + newBook.getbID() + "' "
+								+ "AND ( (r.endRental IS null) OR "
 								+ "('" + endDate   + "' >= r.startRental AND '" + endDate   + "' <= r.endRental  ) OR "
 								+ "('" + startDate + "' <= r.endRental   AND '" + startDate + "' >= r.startRental) OR "
 								+ "('" + startDate + "' <= r.startRental AND '" + endDate   + "' >= r.endRental  ));";
 		
 		
-//		String getPrice = "SELECT " TODO: CONTINUE HERE
+		String getPrice = "SELECT "
+							+ "price_day "
+							+ "FROM tbl_book "
+							+ "WHERE book_id = '" + newBook.getbID() + "';";
 		
 		try {
 			rs = st.executeQuery(fillAll);
@@ -356,14 +356,11 @@ public class SQLRent {
 				
 			}
 			
+			rs = st.executeQuery(getPrice);
+			if (rs.next()) newBook.setPrice_day(rs.getString("price_day"));
+			
 		
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
-		
-		
-		
-		
+		} catch (SQLException e) {}
 		
 		return newBook;
 	}
@@ -388,6 +385,22 @@ public class SQLRent {
 	}
 	
 	
-	
+	public void updateRent(Rent rent) {
+		
+		String update = "UPDATE "
+							+ "tbl_rental "
+							+ "SET "
+								+ "startRental  = '" + rent.getStartRentalDate() + "', "
+								+ "endRental    = '" + rent.getEndRentalDate()   + "', "
+								+ "expires      = '" + rent.getExpiresDate()     + "' "
+								
+							+ "WHERE (rental_id = '" + rent.getRental_id() + "');";
+		
+		try {
+			st.executeUpdate(update);
+			
+		} catch (SQLException e) {}
+		
+	}
 	
 }

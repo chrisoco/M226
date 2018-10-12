@@ -86,7 +86,7 @@ public class PersonController {
 			personSearchList = SQL.loadPersonSearchData(userSearch.getText());
 			
 			for (Person p : personSearchList) {
-				personListView.getItems().add(new Label(p.getNameLabel()));
+				personListView.getItems().add(p.getNameLabel());
 			}
 		} 
 		

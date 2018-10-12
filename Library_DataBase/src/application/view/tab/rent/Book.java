@@ -1,5 +1,7 @@
 package application.view.tab.rent;
 
+import javafx.scene.control.Label;
+
 public class Book {
 
 	private int invID, bID, anz;
@@ -15,11 +17,13 @@ public class Book {
 		this.anz    = anz;
 	}
 
+	
 	public Book(int bID, int anz) {
 		
 		this.bID    = bID;
 		this.anz    = anz;
 	}
+	
 	
 	public Book(int invID, int bID, String bTitle, String price_day) {
 		
@@ -32,10 +36,8 @@ public class Book {
 	}
 	
 	
-	
-	
-	public String toLabel() {
-		return String.format("%-20s (%d)", this.bTitle, this.anz);
+	public Label toLabel() {
+		return new Label(String.format("%-20s (%d)", this.bTitle, this.anz));
 	}
 	
 	
@@ -71,19 +73,11 @@ public class Book {
 	public void setAnz(int anz) {
 		this.anz = anz;
 	}
-
 	public String getPrice_day() {
 		return price_day;
 	}
-
 	public void setPrice_day(String price_day) {
 		this.price_day = price_day;
 	}
-
-	
-	
-	
-	
-	
 	
 }

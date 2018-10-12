@@ -1,5 +1,7 @@
 package application.view.tab.person;
 
+import javafx.scene.control.Label;
+
 public class Person {
 
 	private int ID, address_id, store_id;
@@ -32,12 +34,11 @@ public class Person {
 	}
 
 	
-	public String getNameLabel() {
-		return String.format("%-20s %s", lastName, firstName);
+	public Label getNameLabel() {
+		return new Label(String.format("%-20s %s", lastName, firstName));
 	}
 	
 	
-
 
 
 	
