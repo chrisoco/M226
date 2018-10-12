@@ -35,7 +35,7 @@
    <right>
       <BorderPane prefWidth="275.0" BorderPane.alignment="CENTER">
          <center>
-            <JFXListView fx:id="bookListView" onMouseClicked="#bookListViewControll" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
+            <JFXListView fx:id="bookSearchListView" onMouseClicked="#bookListViewControll" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold; -fx-border-style: solid;" BorderPane.alignment="CENTER" />
          </center>
          <top>
             <JFXTextField fx:id="bookSearch" labelFloat="true" onKeyReleased="#loadBookSearchData" promptText="SEARCH BOOK" BorderPane.alignment="CENTER">
@@ -115,7 +115,7 @@
          <center>
             <BorderPane BorderPane.alignment="CENTER">
                <center>
-                  <JFXListView fx:id="rentOfPersonListView" onMouseClicked="#rentOfPersonListViewControll" style="-fx-background-color: gray; -fx-font-family: Monospaced;" BorderPane.alignment="CENTER" />
+                  <JFXListView fx:id="rentListView" onMouseClicked="#rentOfPersonListViewControll" style="-fx-background-color: gray; -fx-font-family: Monospaced;" BorderPane.alignment="CENTER" />
                </center>
                <top>
                   <Label text="All Rentuals:" BorderPane.alignment="CENTER_LEFT">
@@ -138,7 +138,7 @@
          <bottom>
             <BorderPane prefHeight="350.0" BorderPane.alignment="CENTER">
                <center>
-                  <JFXListView fx:id="rentCurrentListView" onMouseClicked="#rentCurrentListViewControll" style="-fx-background-color: gray; -fx-font-family: Monospaced; -fx-border-style-top: solid;" BorderPane.alignment="CENTER" />
+                  <JFXListView fx:id="rentBookListView" onMouseClicked="#rentCurrentListViewControll" style="-fx-background-color: gray; -fx-font-family: Monospaced; -fx-border-style-top: solid;" BorderPane.alignment="CENTER" />
                </center>
                <top>
                   <Label text="Selected Rent:" BorderPane.alignment="CENTER_LEFT">
