@@ -1,3 +1,12 @@
+/**
+ * SQLRent Class
+ * 
+ * @author Christopher O'Connor
+ * @version 1.0
+ * @date 12.10.2018
+ * 
+ */
+
 package application.view.tab.rent;
 
 import java.sql.Connection;
@@ -17,7 +26,9 @@ public class SQLRent {
 	
 	
 	
-	
+	/**
+	 * Custom constructor Instantiates the SQLRent Class.
+	 */
 	public SQLRent() {
 		try {
 			this.DBCon = Main.db.getDBCon();
@@ -29,7 +40,10 @@ public class SQLRent {
 	
 	
 	
-	
+	/**
+	 * Get All the Stores and Order them by ID
+	 * @return ArrayList List Of all Stores in Correct Order.
+	 */
 	public ArrayList<String> getStores(){
 		
 		ArrayList<String> result = new ArrayList<>();
@@ -61,6 +75,11 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Get the Store ID from the Currently used StaffMember.
+	 * @param staffID The ID of the Currently used StaffMember.
+	 * @return int Returns the Store ID from the Staff.
+	 */
 	public int getStoreIDFromStaff(int staffID) {
 		
 		String query = "SELECT "
@@ -81,6 +100,11 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Load the PersonSearchData Matching the Value
+	 * @param userSearch User Search Criteria from TextField
+	 * @return ArrayList List of All Customers matching Search.
+	 */
 	public ArrayList<Person> loadPersonSearchData(String userSearch) {
 		
 		ArrayList<Person> searchResult = new ArrayList<Person>();
@@ -107,6 +131,12 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Load all the Books Matching the Search Criteria and selected Store and Merge + Count them.
+	 * @param userSearch User Search Criteria.
+	 * @param store The Selected Store Index.
+	 * @return ArrayList List of all books matching the Criterias.
+	 */
 	public ArrayList<Book> loadBookSearchData(String userSearch, int store) {
 		
 		ArrayList<Book> searchResult = new ArrayList<>();
@@ -137,6 +167,13 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Load all the Books that are not available during specified Time.
+	 * @param store Currently Selected Store Index.
+	 * @param startDate Start Date of the Rent.
+	 * @param endDate End Date of the Rent.
+	 * @return ArrayList List of all not available Books.
+	 */
 	public ArrayList<Book> loadBookRentData(int store, String startDate, String endDate) {
 		
 		ArrayList<Book> searchResult = new ArrayList<>();
@@ -172,6 +209,11 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Loads all the Rents of the Selected Customer.
+	 * @param customerID ID of the currently Selected Customer.
+	 * @return ArrayList List of all Rents of Selected Customer.
+	 */
 	public ArrayList<Rent> loadRentsOfPerson(int customerID){
 		
 		ArrayList<Rent> searchResult = new ArrayList<>();
@@ -210,6 +252,11 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Load the Books containing in the Selected Rent.
+	 * @param rentID ID of the Currently Selected Rent.
+	 * @return ArrayList List of all Books contained in Selected Rent.
+	 */
 	public ArrayList<Book> loadBooksOfRent(int rentID){
 		
 		ArrayList<Book> result = new ArrayList<>();
@@ -244,6 +291,10 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Delete the Selected Rent and all Book_FKs related.
+	 * @param rentID ID of the Currently Selected Rent.
+	 */
 	public void deleteRent(int rentID) {
 		
 		String delBooks = "DELETE FROM tbl_listofrentalbooks "
@@ -262,6 +313,11 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Delete the Selected Book from the Selected Rent.
+	 * @param rentID The Selected Rent ID.
+	 * @param invID The Selected Inventory ID of the Book.
+	 */
 	public void deleteBookFromRent(int rentID, int invID) {
 		
 		String removeBook = "DELETE FROM tbl_listofrentalbooks "
@@ -276,6 +332,14 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Add new Rent to the DataBase with given params and Return the Rent with the associated RentID.
+	 * @param newRent Rent with Default Date Values.
+	 * @param staffID ID of the current Staff Member.
+	 * @param customerID ID of the current Selected Customer.
+	 * @param storeID ID of the currently Selected Store.
+	 * @return Rent Returns the Rent as OBJ with the associated RentID.
+	 */
 	public Rent addRent(Rent newRent, int staffID, int customerID, int storeID) {
 		
 		String addRent = "INSERT "
@@ -300,6 +364,14 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Get a Free Inventory ID from a Book between start AND end Date + the Given Store.
+	 * @param newBook The Book which we want to search a new Inventory ID.
+	 * @param startDate Start Date of the Selection.
+	 * @param endDate End Date of the Selection.
+	 * @param storeID ID of the Selected Store.
+	 * @return Book Return the modified Book with its new Free Inventory ID.
+	 */
 	public Book getFreeInventoryIDFROMBookID(Book newBook, String startDate, String endDate, int storeID) {
 		
 		ArrayList<Integer> allInvIDs  = new ArrayList<>();
@@ -366,6 +438,11 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Add Book to a existing Rent.
+	 * @param inventoryID ID of the Selected Book.
+	 * @param rentalID ID of the Selected Rent.
+	 */
 	public void bookToRent(int inventoryID, int rentalID) {
 		
 		String query  = "INSERT "
@@ -385,6 +462,10 @@ public class SQLRent {
 	}
 	
 	
+	/**
+	 * Update the Selected Rent with new Dates.
+	 * @param rent Selected Rent.
+	 */
 	public void updateRent(Rent rent) {
 		
 		String update = "UPDATE "

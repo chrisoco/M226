@@ -1,3 +1,12 @@
+/**
+ * Rent Class
+ * 
+ * @author Christopher O'Connor
+ * @version 1.0
+ * @date 12.10.2018
+ * 
+ */
+
 package application.view.tab.rent;
 
 import java.time.LocalDate;
@@ -18,6 +27,16 @@ public class Rent {
 	private ArrayList<Book> bookList;
 	
 	
+	/**
+	 * Custom constructor Instantiates the Rent Class.
+	 * @param rental_id ID in DataBase of the Rent.
+	 * @param anz The Amount of Books in the Rent
+	 * @param startRentalDate Start Date of the Rent.
+	 * @param endRentalDate End Date of the Rent.
+	 * @param expiresDate Expires Date of the Rent.
+	 * @param storeID The Store ID Where the Rent is made.
+	 * @param storeName The Store Name Where the Rent is made.
+	 */
 	public Rent(int rental_id, int anz, String startRentalDate, 
 				  String endRentalDate, String expiresDate, int storeID, String storeName) {
 		
@@ -32,6 +51,12 @@ public class Rent {
 	}
 	
 	
+	/**
+	 * Custom constructor Instantiates the Rent Class.
+	 * @param startRentalDate Start Date of the Rent.
+	 * @param expiresDate Expires Date of the Rent.
+	 * @param storeID The Store ID Where the Rent is made.
+	 */
 	public Rent(String startRentalDate, String expiresDate, int storeID) {
 		
 		this.startRentalDate = startRentalDate;
@@ -46,11 +71,19 @@ public class Rent {
 	}
 	
 	
+	/**
+	 * Get Rent Values and Return them as a Label to the Call.
+	 * @return Label returns Label with Info of the Rent (Start, End, Expires Date, Books Count, Store Name and Price.
+	 */
 	public Label toLabel() {
 		return new Label(String.format("%-15s %-15s %5d %-5s %-10s %16.2f CHF.-", startRentalDate, endRentalDate, anz, " ", storeName, rentPrice));
 	}
 	
 	
+	/**
+	 * Calculates the Price of the Rent:
+	 * ENDDATE - STARTDATE = DAYS *= rentPrice.
+	 */
 	public void calcPriceOfRent() {
 		
 		this.rentPrice = 0.0;
@@ -59,7 +92,6 @@ public class Rent {
 			this.rentPrice += Double.parseDouble(b.getPrice_day().replace(" CHF", ""));
 		}
 		
-		// ENDDATE - STARTDATE = DAYS -> DAYS * rentPrice.
 		if (endRentalDate != null) 
 			 rentPrice *= ChronoUnit.DAYS.between(
 					getDateOfString(startRentalDate), getDateOfString(endRentalDate));
@@ -70,6 +102,14 @@ public class Rent {
 	}
 	
 	
+	/**
+	 * Formats String (yyyy-MM-dd) to LocalDate Value.
+	 * However, If the String is null, return null.
+	 * 
+	 * @param date String Value
+	 * @return LocalDate Value
+	 * 
+	 */
 	private LocalDate getDateOfString(String date) {
 		return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}

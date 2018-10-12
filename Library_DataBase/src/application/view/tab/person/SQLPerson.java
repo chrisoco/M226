@@ -1,3 +1,12 @@
+/**
+ * SQLPerson Class
+ * 
+ * @author Christopher O'Connor
+ * @version 1.0
+ * @date 12.10.2018
+ * 
+ */
+
 package application.view.tab.person;
 
 import java.sql.Connection;
@@ -15,6 +24,9 @@ public class SQLPerson {
 	private ResultSet  rs;
 	
 	
+	/**
+	 * Custom constructor Instantiates the SQLPerson Class.
+	 */
 	public SQLPerson() {
 		try {
 			this.DBCon = Main.db.getDBCon();
@@ -25,7 +37,10 @@ public class SQLPerson {
 	}
 	
 	
-	
+	/**
+	 * Gets All Stores in a List
+	 * @return ArrayList Returns all Store Names
+	 */
 	public ArrayList<String> getStores(){
 		
 		ArrayList<String> result = new ArrayList<>();
@@ -55,7 +70,11 @@ public class SQLPerson {
 		return result;
 	}
 	
-
+	/**
+	 * Load All Persons matching the Search Criteria
+	 * @param userSearch Criteria
+	 * @return ArrayList List of All Persons machting the Criteria
+	 */
 	public ArrayList<Person> loadPersonSearchData(String userSearch) {
 		
 		ArrayList<Person> searchResult = new ArrayList<Person>();
@@ -88,7 +107,10 @@ public class SQLPerson {
 		return searchResult;
 	}
 	
-	
+	/**
+	 * Load All Data From Person specified
+	 * @param p Person Object
+	 */
 	public void loadPersonData(Person p) {
 		
 		String basic = "SELECT "
@@ -152,7 +174,11 @@ public class SQLPerson {
 		
 	}
 	
-	
+	/**
+	 * Load City Name of PLZ Associated with and Country Name
+	 * @param plz PLZ of City
+	 * @return String CityName and Country
+	 */
 	public String [] getAutoFill(String plz) {
 		
 		String query = 	  "SELECT "
@@ -181,7 +207,11 @@ public class SQLPerson {
 		return result;
 	}
 	
-	
+	/**
+	 * Insert New Country
+	 * @param countryName New Country Name
+	 * @return Return Index of Country 
+	 */
 	public int newCountry(String countryName) {
 		
 		String search =       "SELECT "
@@ -208,7 +238,12 @@ public class SQLPerson {
 		return 0;
 	}
 	
-	
+	/**
+	 * Insert New City
+	 * @param city_plz_id PLZ Number
+	 * @param cityName City Name 
+	 * @param country_id Country ID
+	 */
 	public void newCity(String city_plz_id, String cityName, int country_id) {
 		
 		String search =       "SELECT "
@@ -236,7 +271,12 @@ public class SQLPerson {
 
 	}
 	
-	
+	/**
+	 * Insert New Address
+	 * @param streetName StreetName
+	 * @param city_plz_fk City ID
+	 * @return int ID of Address
+	 */
 	public int newAddress(String streetName, String city_plz_fk) {
 		
 		String search =       "SELECT "
@@ -263,7 +303,11 @@ public class SQLPerson {
 		return 0;
 	}
 	
-	
+	/**
+	 * Insert Basic Person Information
+	 * @param p Person Object
+	 * @return int ID of Person
+	 */
 	public int insertBasicPerson(Person p) {
 		
 		String query = "INSERT "
@@ -293,7 +337,12 @@ public class SQLPerson {
 		return 0;
 	}
 	
-	
+	/**
+	 * Insert Person into Customer Table
+	 * @param ID ID of Person
+	 * @param since Date since Customer
+	 * @return boolean Did Insert Work
+	 */
 	public boolean insertCustomer(int ID, String since) {
 		
 		String query = "INSERT " 
@@ -306,7 +355,15 @@ public class SQLPerson {
 		return (insert(query) == 1) ? true : false;
 	}
 	
-	
+	/**
+	 * Insert Person into Table Staff
+	 * @param ID ID of Person
+	 * @param userName Staff UserName
+	 * @param password Staff LoginName
+	 * @param since Staff since Date
+	 * @param storeID Store ID where he Works
+	 * @return boolean Did Insert Work 
+	 */
 	public boolean insertStaff(int ID, String userName, String password, String since, int storeID) {
 		
 		String query =    "INSERT "
@@ -320,7 +377,11 @@ public class SQLPerson {
 		return (insert(query) == 1) ? true : false;
 	}
 	
-	
+	/**
+	 * Update Basic Person information
+	 * @param p Person Object
+	 * @return boolean Did Insert Work
+	 */
 	public boolean updateBasicPerson(Person p) {
 		
 		String query =    "UPDATE "
@@ -339,7 +400,13 @@ public class SQLPerson {
 		return (insert(query) == 1) ? true : false; 
 	}
 	
-	
+	/**
+	 * Update Customer
+	 * @param ID ID of Person
+	 * @param date Date since hes Customer
+	 * @param isCustomer Is he a Customer?
+	 * @return boolean Did Insert Work
+	 */
 	public boolean updateCustomer(int ID, String date, boolean isCustomer) {
 		
 		String query =    "SELECT "
@@ -380,7 +447,11 @@ public class SQLPerson {
 		return false;
 	}
 	
-	
+	/**
+	 * Update Staff
+	 * @param p Person Object
+	 * @return boolean Did Insert Work
+	 */
 	public boolean updateStaff(Person p) {
 		
 		String query =    "SELECT "
@@ -422,7 +493,11 @@ public class SQLPerson {
 		return false;
 	}
 	
-	
+	/**
+	 * INSERT UPDATE IN DATABASE
+	 * @param query InsertQuery
+	 * @return boolean Did UPDATE Work
+	 */
 	private int insert(String query) {
 		try {
 			return st.executeUpdate(query);

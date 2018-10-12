@@ -1,3 +1,12 @@
+/**
+ * DB Class
+ * 
+ * @author Christopher O'Connor
+ * @author Umut Savas
+ * @version 1.0
+ * 
+ */
+
 package application;
 
 import java.sql.Connection;
@@ -23,6 +32,9 @@ public class DB {
 	private int staff_ID;
 	
 	
+	/**
+	 * Custom constructor Instantiates the DB Class.
+	 */
 	public DB() {
 		try {
 			this.DBCon = DriverManager.getConnection(jdbcUrl+settings, "JavaApp", "javaapp");
@@ -36,6 +48,12 @@ public class DB {
 	}
 	
 	
+	/**
+	 * Login to the Program.
+	 * @param userName Entered UserName
+	 * @param userPW Entered UserPassword
+	 * @return Boolean Login Successful Yes / No
+	 */
 	public boolean login(String userName, String userPW) {
 		
 		String query = "SELECT "

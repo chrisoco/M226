@@ -1,3 +1,12 @@
+/**
+ * RentController
+ * 
+ * @author Christopher O'Connor
+ * @version 1.0
+ * @date 12.10.2018
+ * 
+ */
+
 package application.view.tab.rent;
 
 import java.time.LocalDate;
@@ -54,8 +63,12 @@ public class RentController {
 	
 	
 	
-	
-	
+	/**
+	 * Customer Initialises Method which is run on Program Start.
+	 * It sets the StaffID, StoreID and sets Default Values for the Date Fields.
+	 * It creates the Dropdown-Items (All Store Names).
+	 * 
+	 */
 	@FXML
 	public void initialize() {
 		
@@ -75,6 +88,12 @@ public class RentController {
 		initAllPopUps();
 	}
 	
+	/**
+	 * Sets Default Values for all Calendars.
+	 * Sets the Current Date Value into the Rental Start Calendar Date.
+	 * Sets the Current Date Value + 28 Days into the Rental Expires Calendar Date.
+	 * Sets the End Calendar Date to null.
+	 */
 	private void setDefaultCalDates() {
 		
 		rentalStartCal.setValue(today);
@@ -82,6 +101,9 @@ public class RentController {
 		rentalEndCal  .setValue(null);
 	}
 	
+	/**
+	 * Calls the Initialise for all the PopUps for Rent-, Book- and BookSearch-List.
+	 */
 	private void initAllPopUps() {
 		initPopUpRentList();
 		initPopUpBookSearchList();
@@ -89,7 +111,10 @@ public class RentController {
 	}
 	
 	
-	
+	/**
+	 * Initialises the PopUpRentList. 
+	 * Buttons: show, del, can.
+	 */
 	private void initPopUpRentList() {
 		
 		JFXButton show = new JFXButton("SHOW");
@@ -121,6 +146,11 @@ public class RentController {
 		
 	}
 	
+	
+	/**
+	 * Initialises the PopUpBookSearchList.
+	 * Buttons: add, can. 
+	 */
 	private void initPopUpBookSearchList() {
 		
 		JFXButton add = new JFXButton("ADD");
@@ -145,7 +175,11 @@ public class RentController {
 		popUpBookSearchList = new JFXPopup(vBox);
 	}
 	
-
+	
+	/**
+	 * Initialises the PopUpRentBookList. 
+	 * Buttons: del, can.
+	 */
 	private void initPopUpRentBookList() {
 		
 		JFXButton del = new JFXButton("DELETE");
@@ -172,7 +206,13 @@ public class RentController {
 	
 	
 	
-	
+	/**
+	 * Rent of CurrentSelected Person Controller.
+	 * Load the BookList of the Selected Rent. OR Show PopUpRentList
+	 * 
+	 * @param event MouseEvent: Detect if the Main or Secondary Mouse-Button was clicked.
+	 * 
+	 */
 	@FXML
 	private void rentOfPersonListViewControll(MouseEvent event) {
 		
@@ -192,6 +232,13 @@ public class RentController {
 	}
 	
 	
+	/**
+	 * Books of CurrentSelected Rent Controller.
+	 * Show PopUpRentList if Secondary Mouse-Button was clicked.
+	 * 
+	 * @param event MouseEvent: Detect if the Main or Secondary Mouse-Button was clicked.
+	 * 
+	 */
 	@FXML
 	private void rentCurrentListViewControll(MouseEvent event) {
 		
@@ -207,6 +254,13 @@ public class RentController {
 	}
 	
 	
+	/**
+	 * BookList Controller of SearchBookList.
+	 * Show PopUpRentList if Secondary Mouse-Button was clicked.
+	 * 
+	 * @param event MouseEvent: Detect if the Main or Secondary Mouse-Button was clicked.
+	 * 
+	 */
 	@FXML
 	private void bookListViewControll(MouseEvent event) {
 		
@@ -224,7 +278,9 @@ public class RentController {
 	
 	
 	
-	
+	/**
+	 * Set the Date of the ExpiredCalendar to StartDate + 28 Days.
+	 */
 	@FXML
 	private void setExpCal() {
 		rentalExpCal.setValue(rentalStartCal.getValue().plusDays(28));
@@ -233,34 +289,63 @@ public class RentController {
 	
 	
 	
+	/**
+	 * @return int Returns the Current Selected Index of the RentList.
+	 */
 	private int getSelectedRentIndex() {
 		return rentListView.getSelectionModel().getSelectedIndex();
 	}
 	
+	/**
+	 * @return int Returns the Current Selected Index of the RentBookList.
+	 */
 	private int getSelectedBookIndex() {
 		return rentBookListView.getSelectionModel().getSelectedIndex();
 	}
 	
+	/**
+	 * @return int Returns the Current Selected Index of the BookSearchList.
+	 */
 	private int getSelectedBookSearchIndex() {
 		return bookSearchListView.getSelectionModel().getSelectedIndex();
 	}
 	
+	/**
+	 * @return int Returns the Current Selected Index of the Person List.
+	 */
 	private int getSelectedPersonIndex() {
 		return personListView.getSelectionModel().getSelectedIndex();
 	}
 	
+	/**
+	 * @return int Returns the Current Selected Index of the Store ComboBox + 1.
+	 */
 	private int getSelectedStoreIndex() {
 		return store.getSelectionModel().getSelectedIndex() + 1;
 	}
 	
 	
 	
-	
+	/**
+	 * Formats LocalDate Value to String: yyyy-MM-dd
+	 * 
+	 * @param date LocalDate Value
+	 * @return String Value
+	 * 
+	 */
 	private String formatDateOfCal(LocalDate date) {
 
 		return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 	
+	/**
+	 * Formats String (yyyy-MM-dd) to LocalDate Value.
+	 * However, If the String is null, return null.
+	 * 
+	 * @param date String Value
+	 * @return LocalDate Value
+	 * 
+	 */
 	private LocalDate getDateOfString(String date) {
 		
 		if (date == null) return null;
@@ -271,26 +356,40 @@ public class RentController {
 	
 	
 	
-	
+	/**
+	 * Clear the Content of the RentBookList.
+	 */
 	private void clearRentBookList() {
 		rentBookListView.getItems().clear();
 	}
 	
+	/**
+	 * Clear the Content of the PersonList.
+	 */
 	private void clearPersonList() {
 		personListView.getItems().clear();
 	}
 	
+	/**
+	 * Clear the Content of the RentList.
+	 */
 	private void clearRentList() {
 		rentListView.getItems().clear();
 	}
 	
+	/**
+	 * Clear the Content of the BookSearchList.
+	 */
 	private void clearBookSearchList() {
 		bookSearchListView.getItems().clear();
 	}
 	
 	
 	
-	
+	/**
+	 * Create the Header for the RentList. It will act as an List Element.
+	 * Also sets the Font to bold.
+	 */
 	private void createHeaderRentList() {
 		Label header = new Label(String.format("%-15s %-16s %-10s %-20s %s", "Start Rent", "End Rent", "BOOKS", "STORE", "PRICE"));
 		
@@ -299,6 +398,10 @@ public class RentController {
 		rentListView.getItems().add(header);
 	}
 	
+	/**
+	 * Create the Header for the RentBookList. It will act as an List Element.
+	 * Also sets the Font to bold.
+	 */
 	private void createHeaderBookRentList() {
 		Label header = new Label(String.format("%-65s %-10s", "BOOK TITLE",	"PRICE / DAY"));
 		
@@ -309,7 +412,9 @@ public class RentController {
 	
 	
 	
-	
+	/**
+	 * Load Person Matching the Search Criteria and Add them to the PersonSearchList.
+	 */
 	@FXML
 	private void loadPersonSearchData() {
 		
@@ -327,6 +432,9 @@ public class RentController {
 	}
 	
 	
+	/**
+	 * Get the selected Index of the PersonSearchList and write the Name to the TextField and set them as Customer.
+	 */
 	@FXML
 	private void loadPersonToLabel() {
 		
@@ -346,6 +454,9 @@ public class RentController {
 	}
 	
 	
+	/**
+	 * Load the Books from Database which are Free Between the Given start and end Date and Count them.
+	 */
 	@FXML
 	private void loadBookSearchData() {
 
@@ -384,6 +495,9 @@ public class RentController {
 	}
 	
 	
+	/**
+	 * Load all Rentals From the Selected Person.
+	 */
 	private void loadRentsOfPerson() {
 		
 		clearRentList();
@@ -405,6 +519,10 @@ public class RentController {
 	}
 	
 	
+	/**
+	 * Load all Books From the Selected Rent and Calculate the Price.
+	 * @param index The Index From the Selected Rent.
+	 */
 	private void loadBookListOfSelectedRent(int index) {
 		
 		int size = rentListView.getItems().size() - 1;
@@ -425,7 +543,7 @@ public class RentController {
 			createHeaderBookRentList();
 			
 			for(Book b : oldRent.getBookList()) {
-				rentBookListView.getItems().add(new Label(b.toLabel2()));
+				rentBookListView.getItems().add(b.toLabel2());
 			}
 			
 			rentPrice.setText(String.format("%-6.2f CHF.-", oldRent.getRentPrice()));
@@ -443,6 +561,9 @@ public class RentController {
 	
 	
 	
+	/**
+	 * Delete the Selected Rent from the Selected Person.
+	 */
 	private void delRentOfPerson() {
 		
 		int index = getSelectedRentIndex() - 1;
@@ -464,6 +585,9 @@ public class RentController {
 	}
 	
 	
+	/**
+	 * Delete the Selected Book from the Selected Rent from the Selected Person.
+	 */
 	private void delRentBook() {
 		
 		int indexBook = getSelectedBookIndex();
@@ -484,6 +608,10 @@ public class RentController {
 	}
 	
 	
+	/**
+	 * Create a new Rent with startDate = current Date, and Expires Date (current Date + 28 Days).
+	 * The Selected Customer is the Owner of the Rent.
+	 */
 	private void createNewRent() {
 
 		Rent newRent = SQL.addRent(new Rent(formatDateOfCal(today), formatDateOfCal(today.plusDays(28)), storeID), staffID, customer.getID(), getSelectedStoreIndex());
@@ -501,6 +629,10 @@ public class RentController {
 	}
 	
 	
+	/**
+	 * Add the Selected Book from the BookSearchList to the Currently Selected Rent.
+	 * To do so the Selected Book needs to get a free (between start- AND end-Date) Inventory ID.
+	 */
 	private void addBookToRent() {
 		
 		int index = getSelectedRentIndex();
@@ -527,6 +659,9 @@ public class RentController {
 	}
 
 	
+	/**
+	 * Update the Currently Selected Rent from the Customer with new Dates.
+	 */
 	@FXML
 	private void updateRent() {
 		

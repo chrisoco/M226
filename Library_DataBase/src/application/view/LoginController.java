@@ -1,3 +1,13 @@
+/**
+ * LoginController Class
+ * 
+ * @author Christopher O'Connor
+ * @author Umut Savas
+ * @version 1.0
+ * @date 12.10.2018
+ * 
+ */
+
 package application.view;
 
 import com.jfoenix.controls.JFXButton;
@@ -27,7 +37,9 @@ public class LoginController {
 	
 	
 
-	
+	/**
+	 * Try to Login with UserName and Password Entered in TextFields.
+	 */
 	@FXML
 	private void login() {
 		this.userLoginName = userLoginNameField.getText();
@@ -44,6 +56,13 @@ public class LoginController {
 	}
 	
 	
+	/**
+	 * Load Dialog with a Message
+	 * @param title Title of the Dialog Message
+	 * @param msg Message of the Dialog
+	 * @param next Boolean if Login was Successful.
+	 * 
+	 */
 	private void loadDialog(String title, String msg, boolean next) {
 		
 		JFXDialogLayout content = new JFXDialogLayout();
@@ -76,32 +95,3 @@ public class LoginController {
     }
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

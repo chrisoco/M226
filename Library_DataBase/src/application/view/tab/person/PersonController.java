@@ -1,12 +1,10 @@
 /**
- *  @author Chris O'Connor
- *  @author Umut Savas
- *  
- *  TODO:
- *  	1) Check UserName UNIQUE ? MarkField Green / Red
- *  	2) Comment All
- *  	3) Are there Improvements?
- *  
+ * PersonController Class
+ * 
+ * @author Christopher O'Connor
+ * @version 1.0
+ * @date 12.10.2018
+ * 
  */
 
 package application.view.tab.person;
@@ -66,6 +64,11 @@ public class PersonController {
 	private ArrayList<Person> personSearchList;
 	
 	
+	/**
+	 * Customer Initialises Method which is run on Program Start.
+	 * It creates the Dropdown-Items (All Store Names).
+	 * 
+	 */
 	@FXML
 	public void initialize() {
 		
@@ -75,7 +78,9 @@ public class PersonController {
 	
 	
 	
-	
+	/**
+	 * Load Person Matching the Search Criteria and Add them to the PersonSearchList.
+	 */
 	@FXML
 	private void loadPersonSearchData() {
 		
@@ -92,6 +97,10 @@ public class PersonController {
 		
 	}
 	
+	/**
+	 * Set the TextField values to the Person Selected.
+	 * @param p Person Object
+	 */
 	private void setBasicPersonLabel(Person p) {
 		
 		firstName  .setText(p.getFirstName  ());
@@ -105,6 +114,9 @@ public class PersonController {
 		email      .setText(p.getEmail      ());
 	}
 	
+	/**
+	 * Load Person Information to the Person Object and then to the TextFields.
+	 */
 	@FXML
 	private void loadPersonToLabel() {
 		
@@ -143,16 +155,34 @@ public class PersonController {
 		}
 	}
 	
+	/**
+	 * Formats String (yyyy-MM-dd) to LocalDate Value.
+	 * However, If the String is null, return null.
+	 * 
+	 * @param date String Value
+	 * @return LocalDate Value
+	 * 
+	 */
 	private LocalDate getDateOfString(String date) {
 		
 		return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 	
+	/**
+	 * Formats LocalDate Value to String: yyyy-MM-dd
+	 * 
+	 * @param date LocalDate Value
+	 * @return String Value
+	 * 
+	 */
 	private String formatDateOfCal(LocalDate date) {
 
 		return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 	
+	/**
+	 * Set the Staff Calendar to Active if the Person is a Staff
+	 */
 	@FXML
 	private void setStaffCalActiveState() {
 		
@@ -164,6 +194,9 @@ public class PersonController {
 		store   .setDisable(active);
 	}
 	
+	/**
+	 * Set the Customer Calendar to Active if the Person is a Customer
+	 */
 	@FXML
 	private void setCustomerCalActiveState() {
 		
@@ -171,6 +204,9 @@ public class PersonController {
 		
 	}
 	
+	/**
+	 * Set Staff TextFields to null (Reset TextFied Values)
+	 */
 	private void setStaffLabelNull() {
 		
 		staffCal.setValue(null);
@@ -180,6 +216,9 @@ public class PersonController {
 		store.getSelectionModel().select(null);
 	}
 	
+	/**
+	 * Reset all TextFields to Empty Value
+	 */
 	@FXML
 	private void resetAll() {
 		
@@ -200,6 +239,9 @@ public class PersonController {
 		setStaffLabelNull();
 	}
 	
+	/**
+	 * Auto Fill CityName if PLZ is Registered in DataBase.
+	 */
 	@FXML
 	private void autoFill() {
 		String [] result = SQL.getAutoFill(plz.getText());
@@ -208,6 +250,9 @@ public class PersonController {
 		country.setText(result[1]);
 	}
 	
+	/**
+	 * Add Person To DataBase or Update if he already Exists.
+	 */
 	@FXML
 	private void updateDB() {
 		
@@ -220,11 +265,18 @@ public class PersonController {
 			
 			else {loadDialog("ERROR 403..", "You have not selected a Person in the Search List...\nPLEASE DO SO...");}
 			
-			
 		}
 		
 	}
 	
+	/**
+	 * Get Address ID or Create a new One and Return the ID Assosiated.
+	 * @param countryName Name of the Country
+	 * @param plzID PLZ ID
+	 * @param cityName City Name
+	 * @param streetName Street Name
+	 * @return int ID of Address
+	 */
 	private int getAddressID(String countryName, String plzID, String cityName, String streetName) {
 		
 		SQL.newCity(plzID, cityName, SQL.newCountry(countryName));
@@ -233,6 +285,9 @@ public class PersonController {
 		
 	}
 	
+	/**
+	 * Add a new Person to the DataBase.
+	 */
 	private void addNewPersonToDB() {
 		
 		boolean customer = false, staff = false;
@@ -269,6 +324,9 @@ public class PersonController {
 		
 	}
 	
+	/**
+	 * Update an existing Person in the DataBase.
+	 */
 	private void updatePersonInDB() {
 		
 		Person p = update(personSearchList.get(
@@ -286,6 +344,11 @@ public class PersonController {
 		
 	}
 
+	/**
+	 * Get Values from TextField and save them in the Object.
+	 * @param p Person Class
+	 * @return Person Return Modified Person
+	 */
 	private Person update(Person p) {
 
 		p.setFirstName  (firstName  .getText());
@@ -326,7 +389,10 @@ public class PersonController {
 	
 	
 	
-	
+	/**
+	 * Check If all Basic TextFields have a Value.
+	 * @return boolean Basic TextFields All Entered.
+	 */
 	private boolean basicInputCheck() {
 		
 		if (firstName.getText().isEmpty() || lastName   .getText().isEmpty() || 
@@ -340,6 +406,10 @@ public class PersonController {
 		return true;
 	}
 	
+	/**
+	 * Advanced InputCheck If Staff and Customer is Entered with Values.
+	 * @return boolean All Good / Someting is missing.
+	 */
 	private boolean advInputCheck() {
 		
 		if (basicInputCheck()) {
@@ -376,6 +446,11 @@ public class PersonController {
 		return false;
 	}
 
+	/**
+	 * Load a Dialog
+	 * @param title Title of Dialog
+	 * @param msg Message of the Dialog
+	 */
 	private void loadDialog(String title, String msg) {
 		
 		JFXDialogLayout content = new JFXDialogLayout();
@@ -394,23 +469,6 @@ public class PersonController {
 		
 		jDialog.show();
 	}
-	
-	
-	
-	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 

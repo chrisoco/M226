@@ -1,3 +1,13 @@
+/**
+ * Person Class
+ * 
+ * @author Christopher O'Connor
+ * @version 1.0
+ * @date 12.10.2018
+ * 
+ */
+
+
 package application.view.tab.person;
 
 import javafx.scene.control.Label;
@@ -12,7 +22,12 @@ public class Person {
 	private boolean Customer, Staff;
 	
 	
-	/** Person Loader for List **/
+	/**
+	 * Custom constructor Instantiates the Person Class.
+	 * @param ID ID of the Person
+	 * @param firstName Person LastName
+	 * @param lastName  Person FirstName
+	 */
 	public Person(int ID, String firstName, String lastName) {
 		this.ID = ID;
 		
@@ -21,7 +36,15 @@ public class Person {
 	}
 
 	
-	/** CREATE NEW PERSON **/
+	/**
+	 * Custom constructor Instantiates the Person Class.
+	 * @param firstName Person FirstName
+	 * @param lastName Person LastName
+	 * @param str_nmbr Person Street Number
+	 * @param tel Person Telephone Number
+	 * @param email Person email Address
+	 * @param address_id ID of the Address
+	 */
 	public Person(String firstName, String lastName, String str_nmbr,
 				  String tel      , String email   , int address_id) {
 
@@ -34,6 +57,10 @@ public class Person {
 	}
 
 	
+	/**
+	 * Get the Name of the Person and Return it as a Label
+	 * @return Label Content: Person LastName + FirstName
+	 */
 	public Label getNameLabel() {
 		return new Label(String.format("%-20s %s", lastName, firstName));
 	}

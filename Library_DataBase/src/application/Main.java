@@ -1,3 +1,13 @@
+/**
+ * Main Application
+ * 
+ * @author Christopher O'Connor
+ * @author Umut Savas
+ * @version 1.0
+ * @date 12.10.2018
+ * 
+ */
+
 package application;
 	
 import java.io.IOException;
@@ -32,6 +42,9 @@ public class Main extends Application {
 		
 	}
 	
+	/**
+	 * Initialise the Root Layout.
+	 */
 	public void initRootLayout() {
 		try {
 			// Load root layout from FXML file.
@@ -52,6 +65,9 @@ public class Main extends Application {
 		
 	}
 	
+	/**
+	 * Initialise the Login Layout.
+	 */
 	public void initLoginLayout() {
 		try {
 			// Load LoginLayout
@@ -72,6 +88,9 @@ public class Main extends Application {
 		
 	}
 	
+	/**
+	 * Initialise the Work Layout.
+	 */
 	public void initWorkLayout() {
 		try {
 			// Load LoginLayout
