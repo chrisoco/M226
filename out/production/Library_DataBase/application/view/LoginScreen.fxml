@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="780.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.LoginController">
+   <children>
+      <Label layoutX="451.0" layoutY="77.0" text="LIBRARY LOGIN" textAlignment="CENTER" textFill="#2911c3" underline="true" AnchorPane.bottomAnchor="550.0" AnchorPane.leftAnchor="475.0" AnchorPane.rightAnchor="475.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect>
+      </Label>
+      <StackPane fx:id="dialogPane" layoutX="500.0" layoutY="275.0" prefHeight="300.0" prefWidth="400.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
+         <children>
+            <JFXTextField fx:id="userLoginNameField" prefColumnCount="20" promptText="USER NAME">
+               <StackPane.margin>
+                  <Insets left="40.0" right="40.0" top="-125.0" />
+               </StackPane.margin>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXTextField>
+            <JFXPasswordField fx:id="userLoginPWField" prefColumnCount="20" promptText="PASSWORD">
+               <StackPane.margin>
+                  <Insets left="40.0" right="40.0" top="10.0" />
+               </StackPane.margin>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXButton buttonType="RAISED" onAction="#login" prefHeight="35.0" prefWidth="120.0" ripplerFill="#0fb50f" style="-fx-background-color: lightgray;" text="LOGIN">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets top="150.0" />
+               </StackPane.margin>
+            </JFXButton>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
