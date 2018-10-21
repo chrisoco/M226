@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7dd8b32-f747-406a-99d1-ab794e0ecb44" name="Default" comment="">
-<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/O'Connor_Savas Dokumentation.docx" beforeDir="false" afterPath="$PROJECT_DIR$/O'Connor_Savas Dokumentation.docx" afterDir="false" />
-=======
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_47.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library_DataBase/tests/DBTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library_DataBase/tests/MainTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library_DataBase/tests/SQLRentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_DataBase/Library_DataBase.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Library_DataBase/Library_DataBase.iml" afterDir="false" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,7 +14,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-<<<<<<< HEAD
   <component name="FUSProjectUsageTrigger">
     <session id="-1750451348">
       <usages-collector id="statistics.lifecycle.project">
@@ -32,61 +21,17 @@
           <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.5" value="1" />
-=======
-  <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/M226$DBTest.ic" NAME="DBTest Coverage Results" MODIFIED="1539700383304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/M226$SQLRentTest_getStores.ic" NAME="SQLRentTest.getStores Coverage Results" MODIFIED="1539700040442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/M226$MainTest_initRootLayout.ic" NAME="MainTest.initRootLayout Coverage Results" MODIFIED="1539701995946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/M226$MainTest.ic" NAME="MainTest Coverage Results" MODIFIED="1539700262669" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/M226$SQLRentTest.ic" NAME="SQLRentTest Coverage Results" MODIFIED="1539700244168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-  </component>
-  <component name="CoverageViewManager">
-    <option name="myElementSize" value="263" />
-  </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1445536999">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.2" value="2" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
           <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-<<<<<<< HEAD
           <entry key="fxml" value="1" />
-=======
-          <entry key="fxml" value="2" />
-          <entry key="iml" value="1" />
-          <entry key="java" value="19" />
-          <entry key="yml" value="1" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-<<<<<<< HEAD
           <entry key="XML" value="1" />
-=======
-          <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="19" />
-          <entry key="XML" value="2" />
-          <entry key="YAML" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="iml" value="1" />
-          <entry key="java" value="253" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="253" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
         </counts>
       </usages-collector>
     </session>
@@ -94,7 +39,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/book/Book.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="527">
@@ -165,27 +109,11 @@
                 <element signature="e#3952#3953#0" expanded="true" />
                 <element signature="e#3998#3999#0" expanded="true" />
               </folding>
-=======
-        <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="29" column="4" lean-forward="true" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Library_DataBase/tests/MainTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/book/BookController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1326">
@@ -193,33 +121,19 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-=======
-        <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/rent/SQLRent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="46" column="36" lean-forward="true" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/person/PersonController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="799">
               <caret line="71" column="9" selection-start-line="71" selection-start-column="9" selection-end-line="71" selection-end-column="9" />
-=======
-        <entry file="file://$PROJECT_DIR$/Library_DataBase/tests/SQLRentTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/WorkLayout.fxml">
           <provider selected="true" editor-type-id="text-editor">
@@ -232,60 +146,24 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/book/SQLBook.java">
-=======
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/rent/RentController.java">
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="81" column="36" selection-start-line="81" selection-start-column="36" selection-end-line="81" selection-end-column="36" />
+            <state relative-caret-position="34">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/person/Person.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
               <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-=======
-        <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/DB.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="21" column="26" lean-forward="true" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Library_DataBase/tests/DBTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
-<<<<<<< HEAD
-=======
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Arquillian JUnit Test Class" />
-        <option value="JUnit4 Test Class" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>unit</find>
-    </findStrings>
-  </component>
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -294,12 +172,6 @@
       <list>
         <option value="$PROJECT_DIR$/Library_DataBase/src/application/view/tab/book/Book.java" />
         <option value="$PROJECT_DIR$/Library_DataBase/src/application/view/tab/book/BookController.java" />
-        <option value="$PROJECT_DIR$/Library_DataBase/src/tests/application/DBTest.java" />
-        <option value="$PROJECT_DIR$/Library_DataBase/Library_DataBase.iml" />
-        <option value="$PROJECT_DIR$/Library_DataBase/src/application/tests/application/DBTest.java" />
-        <option value="$PROJECT_DIR$/Library_DataBase/tests/DBTest.java" />
-        <option value="$PROJECT_DIR$/Library_DataBase/tests/SQLRentTest.java" />
-        <option value="$PROJECT_DIR$/Library_DataBase/tests/MainTest.java" />
       </list>
     </option>
   </component>
@@ -309,19 +181,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-<<<<<<< HEAD
   <component name="ProjectFrameBounds">
     <option name="x" value="422" />
     <option name="y" value="112" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
-=======
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1672" />
-    <option name="y" value="-8" />
-    <option name="width" value="1696" />
-    <option name="height" value="1026" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -329,26 +193,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-<<<<<<< HEAD
       <pane id="PackagesPane" />
-=======
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="M226" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Library_DataBase" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="M226" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Library_DataBase" type="616d4139:PackageViewModuleNode" />
-              <item name="application" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -375,72 +220,23 @@
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
-<<<<<<< HEAD
-=======
-            <path>
-              <item name="M226" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Library_DataBase" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="tab" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="M226" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Library_DataBase" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="tab" type="462c0819:PsiDirectoryNode" />
-              <item name="rent" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="M226" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Library_DataBase" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
           </expand>
           <select />
         </subPane>
       </pane>
-<<<<<<< HEAD
       <pane id="AndroidView" />
-=======
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-<<<<<<< HEAD
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539558229727" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-=======
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539702034533" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
-    <property name="jdk.selected.PLUGIN_MODULE" value="IntelliJ IDEA IU-182.4323.46" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/mysql-connector-java-5.1.47.jar!/" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="" />
-      <recent name="application" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -454,7 +250,6 @@
       </list>
     </option>
   </component>
-<<<<<<< HEAD
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="application.Main" />
@@ -470,66 +265,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-=======
-  <component name="RunManager" selected="JUnit.MainTest.initRootLayout">
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-<<<<<<< HEAD
-=======
-    </configuration>
-    <configuration name="DBTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Library_DataBase" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="DBTest" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Library_DataBase" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MainTest" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainTest.initRootLayout" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Library_DataBase" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MainTest" />
-      <option name="METHOD_NAME" value="initRootLayout" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SQLRentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Library_DataBase" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SQLRentTest" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SQLRentTest.getStores" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Library_DataBase" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SQLRentTest" />
-      <option name="METHOD_NAME" value="getStores" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -545,26 +285,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-<<<<<<< HEAD
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-=======
-    <list>
-      <item itemvalue="JUnit.SQLRentTest.getStores" />
-      <item itemvalue="JUnit.SQLRentTest" />
-      <item itemvalue="JUnit.MainTest" />
-      <item itemvalue="JUnit.DBTest" />
-      <item itemvalue="JUnit.MainTest.initRootLayout" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.MainTest.initRootLayout" />
-        <item itemvalue="JUnit.DBTest" />
-        <item itemvalue="JUnit.MainTest" />
-        <item itemvalue="JUnit.SQLRentTest" />
-        <item itemvalue="JUnit.SQLRentTest.getStores" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
       </list>
     </recent_temporary>
   </component>
@@ -580,50 +303,12 @@
       <updated>1538727056856</updated>
       <workItem from="1538727060309" duration="4143000" />
       <workItem from="1538737404071" duration="7799000" />
-<<<<<<< HEAD
       <workItem from="1539511430492" duration="977000" />
       <workItem from="1540113323478" duration="397000" />
-=======
-      <workItem from="1539682375038" duration="539000" />
-      <workItem from="1539682953494" duration="8133000" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
     </task>
     <servers />
   </component>
-  <component name="TestHistory">
-    <history-entry file="MainTest_initWorkLayout - 2018.10.16 at 16h 05m 18s.xml">
-      <configuration name="MainTest.initWorkLayout" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SQLRentTest_getStores - 2018.10.16 at 16h 18m 58s.xml">
-      <configuration name="SQLRentTest.getStores" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SQLRentTest_getStores - 2018.10.16 at 16h 21m 14s.xml">
-      <configuration name="SQLRentTest.getStores" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SQLRentTest_getStores - 2018.10.16 at 16h 22m 16s.xml">
-      <configuration name="SQLRentTest.getStores" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SQLRentTest_getStores - 2018.10.16 at 16h 27m 35s.xml">
-      <configuration name="SQLRentTest.getStores" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SQLRentTest - 2018.10.16 at 16h 30m 55s.xml">
-      <configuration name="SQLRentTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainTest - 2018.10.16 at 16h 31m 14s.xml">
-      <configuration name="MainTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DBTest - 2018.10.16 at 16h 33m 13s.xml">
-      <configuration name="DBTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainTest_initRootLayout - 2018.10.16 at 16h 35m 44s.xml">
-      <configuration name="MainTest.initRootLayout" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MainTest_initRootLayout - 2018.10.16 at 16h 44m 17s.xml">
-      <configuration name="MainTest.initRootLayout" configurationId="JUnit" />
-    </history-entry>
-  </component>
   <component name="TimeTrackingManager">
-<<<<<<< HEAD
     <option name="totallyTimeSpent" value="13316000" />
   </component>
   <component name="ToolWindowManager">
@@ -631,15 +316,6 @@
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26148796" />
-=======
-    <option name="totallyTimeSpent" value="20614000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="1672" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20354523" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Learn" order="2" />
       <window_info id="Designer" order="3" />
@@ -647,7 +323,6 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Image Layers" order="7" />
-<<<<<<< HEAD
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -661,22 +336,6 @@
       <window_info anchor="bottom" id="Sequence" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.329718" />
-=======
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.3295964" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" />
-      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.3295964" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Sequence" order="11" />
-      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
-      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.3294621" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -711,7 +370,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/book/Book.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-759">
+        <state relative-caret-position="527">
           <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
           <folding>
             <element signature="e#1582#1583#0" expanded="true" />
@@ -782,26 +441,15 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/book/BookController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1326">
           <caret line="86" column="5" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
-=======
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/tests/application/DBTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="32" lean-forward="true" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/WorkLayout.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/person/PersonController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -810,128 +458,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/person/Person.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/LoginScreen.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="40" column="54" selection-start-line="40" selection-start-column="54" selection-end-line="40" selection-end-column="54" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_config.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/java.sql/java/sql/SQLException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/tests/application/DBTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="14" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/DB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="21" column="26" lean-forward="true" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="91" column="4" lean-forward="true" selection-start-line="91" selection-start-column="4" selection-end-line="91" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/Library_DataBase.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/book/SQLBook.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/person/SQLPerson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/tests/DBTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/book/BookController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/rent/RentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state relative-caret-position="799">
-          <caret line="71" column="9" selection-start-line="71" selection-start-column="9" selection-end-line="71" selection-end-column="9" />
-=======
-        <state relative-caret-position="285">
-          <caret line="81" column="36" selection-start-line="81" selection-start-column="36" selection-end-line="81" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/home/HomeController.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/home/SQLHome.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/rent/SQLRent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="46" column="36" lean-forward="true" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/view/tab/person/Person.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -943,33 +476,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="46" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
-=======
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/tests/SQLRentTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/javafx.graphics/javafx/stage/Stage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="267" column="33" lean-forward="true" selection-start-line="267" selection-start-column="33" selection-end-line="267" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/src/application/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="29" column="4" lean-forward="true" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_DataBase/tests/MainTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
->>>>>>> f1963288bf27d2f12c2617ce13e204735e7caf68
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -1051,7 +557,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>mysql-connector-java-5.1.47</last-edited>
+          <last-edited>jfoenix-9.0.6</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
