@@ -42,7 +42,7 @@ public class RentController {
 	private JFXButton submit;
 	
 	@FXML
-	private JFXComboBox<String> store;			// JANICE <--
+	private JFXComboBox<String> store;
 	
 	@FXML
 	private JFXPopup popUpRentList, popUpRentBookList, popUpBookSearchList;
@@ -79,8 +79,8 @@ public class RentController {
 		staffID = 200;
 		storeID = 3;
 		
-		store.getItems().addAll(SQL.getStores());			// JANICE -> Add "Items" to ComboBox (Look at SQLCode)
-		store.getSelectionModel().select(storeID - 1);		// JANICE -> Select an Store with the ID (index).
+		store.getItems().addAll(SQL.getStores());
+		store.getSelectionModel().select(storeID - 1);
 		
 		today = LocalDate.now();
 		setDefaultCalDates();
