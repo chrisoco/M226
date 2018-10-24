@@ -1,0 +1,41 @@
+DB Changes:
+
+	tbl_address
+		UQ INDEX	-> street, tbl_city_fk
+
+
+	tbl_store
+		UQ INDEX	-> storeName, tbl_address_fk, str_nmbr
+
+
+	tbl_person
+		UQ -> email
+		UQ INDEX	-> firstName, lastName, tbl_address_fk, str_nmbr
+		
+		
+	tbl_staff
+		UQ -> tbl_person_fk
+
+
+	tbl_listOfRentalBooks
+		UQ INDEX	-> tbl_inventory_fk, tbl_rental_fk
+
+
+	tbl_book
+		UQ INDEX	-> title, releaseDate, tbl_publisher_fk, tbl_author_fk
+
+
+	tbl_publisher
+		UQ -> company
+		
+		
+	tbl_author
+		UQ INDEX	-> firstName, lastName
+		
+
+	tbl_language
+		UQ -> lang
+
+
+	tbl_category
+		UQ -> cat
