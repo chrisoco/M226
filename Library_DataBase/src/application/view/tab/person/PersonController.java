@@ -236,6 +236,8 @@ public class PersonController {
 		isStaff    .setSelected(false);
 		isNewPerson.setSelected(true );
 		
+		personListView.getSelectionModel().clearSelection();
+		
 		setStaffLabelNull();
 	}
 	
@@ -270,7 +272,7 @@ public class PersonController {
 	}
 	
 	/**
-	 * Get Address ID or Create a new One and Return the ID Assosiated.
+	 * Get Address ID or Create a new One and Return the ID Associated.
 	 * @param countryName Name of the Country
 	 * @param plzID PLZ ID
 	 * @param cityName City Name

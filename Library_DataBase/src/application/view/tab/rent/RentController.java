@@ -334,7 +334,9 @@ public class RentController {
 	 * 
 	 */
 	private String formatDateOfCal(LocalDate date) {
-
+		
+		if (date == null) return null;
+		
 		return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 	
