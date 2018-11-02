@@ -37,8 +37,8 @@ public class Main extends Application {
 		Main.db = new DB();
 		
 		initRootLayout();
-//		initLoginLayout();	// Use    Line for LoginScreen
-		initWorkLayout();	// Remove Line for LoginScreen
+		initLoginLayout();	// Use    Line for LoginScreen
+//		initWorkLayout();	// Remove Line for LoginScreen
 		
 	}
 	
