@@ -19,13 +19,13 @@
                 	<fx:include fx:id="PersonTab" source="./tab/person/PersonTab.fxml"/>
              	</content>
             </Tab>
-<!-- 
+
             <Tab text="Book">
               <content>
               		<fx:include fx:id="BookTab" source="./tab/book/BookTab.fxml"/>
               </content>
             </Tab> 
--->
+
             <Tab text="RENT">
               <content>
                 <fx:include fx:id="RentTab" source="./tab/rent/RentTab.fxml"/>

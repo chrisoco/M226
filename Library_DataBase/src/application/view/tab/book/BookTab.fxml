@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -25,7 +24,7 @@
                <children>
                   <BorderPane prefHeight="860.8" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <top>
-                        <JFXTextField fx:id="bookSearch" labelFloat="true" onKeyReleased="#loadPersonSearchData" promptText="SEARCH" BorderPane.alignment="CENTER">
+                        <JFXTextField fx:id="bookSearch" labelFloat="true" onKeyReleased="#loadBookSearchData" promptText="SEARCH" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -35,7 +34,7 @@
                         </JFXTextField>
                      </top>
                      <center>
-                        <JFXListView fx:id="bookListView" onMouseClicked="#loadPersonToLabel" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold;" BorderPane.alignment="CENTER">
+                        <JFXListView fx:id="bookListView" onMouseClicked="#loadBookToLabel" style="-fx-background-color: lightgray; -fx-font-family: Monospaced; -fx-font-weight: bold;" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets top="40.0" />
                            </BorderPane.margin>
@@ -93,7 +92,7 @@
                                     <Insets left="40.0" right="40.0" />
                                  </GridPane.margin>
                               </JFXTextField>
-                              <JFXTextField fx:id="priceReplace" labelFloat="true" onKeyReleased="#autoFill" promptText="Price replace" GridPane.rowIndex="4">
+                              <JFXTextField fx:id="priceReplace" labelFloat="true" promptText="Price replace" GridPane.rowIndex="4">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -120,31 +119,46 @@
                                     <Font size="14.0" />
                                  </font>
                               </JFXButton>
-                              <JFXComboBox fx:id="rating" labelFloat="true" prefHeight="25.0" prefWidth="337.0" promptText="Rating" GridPane.columnIndex="1">
+                              <JFXTextField fx:id="rating" labelFloat="true" promptText="Rating" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
                                  <GridPane.margin>
                                     <Insets left="40.0" right="40.0" />
                                  </GridPane.margin>
-                              </JFXComboBox>
-                              <JFXComboBox fx:id="publisher" labelFloat="true" prefHeight="25.0" prefWidth="337.0" promptText="Publisher" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              </JFXTextField>
+                              <JFXTextField fx:id="publisher" labelFloat="true" promptText="Publisher" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="40.0" right="40.0" />
+                                 </padding>
+                              </JFXTextField>
+                              <JFXTextField fx:id="author" labelFloat="true" promptText="Author" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="40.0" right="40.0" />
+                                 </padding>
+                              </JFXTextField>
+                              <JFXTextField fx:id="language" labelFloat="true" promptText="Language" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
                                  <GridPane.margin>
                                     <Insets left="40.0" right="40.0" />
                                  </GridPane.margin>
-                              </JFXComboBox>
-                              <JFXComboBox fx:id="author" labelFloat="true" prefHeight="25.0" prefWidth="351.0" promptText="Author" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              </JFXTextField>
+                              <JFXTextField fx:id="category" labelFloat="true" promptText="Category" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
                                  <GridPane.margin>
                                     <Insets left="40.0" right="40.0" />
                                  </GridPane.margin>
-                              </JFXComboBox>
-                              <JFXComboBox fx:id="language" labelFloat="true" prefHeight="25.0" prefWidth="351.0" promptText="Language" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                 <GridPane.margin>
-                                    <Insets left="40.0" right="40.0" />
-                                 </GridPane.margin>
-                              </JFXComboBox>
-                              <JFXComboBox fx:id="category" labelFloat="true" prefHeight="25.0" prefWidth="351.0" promptText="Category" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                 <GridPane.margin>
-                                    <Insets left="40.0" right="40.0" />
-                                 </GridPane.margin>
-                              </JFXComboBox>
+                              </JFXTextField>
                            </children>
                            <padding>
                               <Insets top="20.0" />

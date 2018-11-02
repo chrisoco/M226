@@ -8,8 +8,7 @@ public class Book {
     private Date releaseDate;
 
     /**Book Loader for List**/
-    public Book(int ID, int rating, String title, String description, String price_day, String price_replace, Date releaseDate) {
-        this.ID = ID;
+    public Book(String title, String description,Date releaseDate, String price_day, String price_replace, int rating) {
         this.rating = rating;
         this.title = title;
         this.description = description;
@@ -36,6 +35,11 @@ public class Book {
         this.lang = lang;
         this.cat = cat;
         this.releaseDate = releaseDate;
+    }
+
+    public Book(int ID, String title) {
+        this.ID = ID;
+        this.title = title;
     }
 
     public int getID() {
