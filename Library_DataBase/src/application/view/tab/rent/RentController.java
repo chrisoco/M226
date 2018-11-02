@@ -20,6 +20,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
 
+import application.Main;
 import application.view.tab.person.Person;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -73,11 +74,11 @@ public class RentController {
 	public void initialize() {
 		
 //		ENABLE THIS IF Login is enabled.
-//		staffID = Main.db.getStaff_ID();
-//		storeID = SQL.getStoreIDFromStaff(staffID);
+		staffID = Main.db.getStaff_ID();
+		storeID = SQL.getStoreIDFromStaff(staffID);
 		
-		staffID = 200;
-		storeID = 3;
+//		staffID = 200;
+//		storeID = 3;
 		
 		store.getItems().addAll(SQL.getStores());
 		store.getSelectionModel().select(storeID - 1);
